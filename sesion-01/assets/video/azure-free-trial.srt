@@ -1,0 +1,158 @@
+1
+00:00:00,107 --> 00:00:02,124
+Abre la página oficial de Azure y
+
+2
+00:00:02,124 --> 00:00:04,318
+selecciona Probar Azure gratis.
+
+3
+00:00:05,192 --> 00:00:08,152
+La oferta para nuevos clientes incluye
+doscientos
+
+4
+00:00:08,152 --> 00:00:10,789
+dólares de crédito durante treinta días.
+
+5
+00:00:11,654 --> 00:00:14,048
+Revisa las condiciones vigentes.
+
+6
+00:00:15,535 --> 00:00:17,709
+Ten a mano una cuenta de Microsoft
+
+7
+00:00:17,709 --> 00:00:18,501
+o GitHub,
+
+8
+00:00:18,725 --> 00:00:21,227
+tu teléfono y una tarjeta de crédito
+
+9
+00:00:21,227 --> 00:00:22,835
+o débito no prepago.
+
+10
+00:00:24,315 --> 00:00:26,695
+Ingresa con tu cuenta de Microsoft.
+
+11
+00:00:27,569 --> 00:00:29,477
+Si todavía no tienes una,
+
+12
+00:00:29,700 --> 00:00:32,203
+selecciona Crear una cuenta y completa los
+
+13
+00:00:32,203 --> 00:00:33,553
+pasos de registro.
+
+14
+00:00:35,039 --> 00:00:36,933
+Completa tu país o región,
+
+15
+00:00:37,127 --> 00:00:37,691
+nombre,
+
+16
+00:00:37,828 --> 00:00:39,979
+apellidos y datos de contacto.
+
+17
+00:00:40,853 --> 00:00:43,499
+Usa la dirección de facturación asociada a
+
+18
+00:00:43,499 --> 00:00:44,434
+tu tarjeta.
+
+19
+00:00:45,907 --> 00:00:48,038
+Selecciona el código de tu país e
+
+20
+00:00:48,038 --> 00:00:50,261
+introduce tu número de teléfono.
+
+21
+00:00:51,135 --> 00:00:53,772
+Elige mensaje de texto o llamada.
+
+22
+00:00:54,639 --> 00:00:55,431
+Después,
+
+23
+00:00:55,611 --> 00:00:58,372
+escribe el código que recibas para completar
+
+24
+00:00:58,372 --> 00:00:59,536
+la verificación.
+
+25
+00:01:01,023 --> 00:01:02,330
+Completa el titular,
+
+26
+00:01:02,554 --> 00:01:03,803
+número de tarjeta,
+
+27
+00:01:04,027 --> 00:01:06,421
+vencimiento y código de seguridad.
+
+28
+00:01:07,295 --> 00:01:10,012
+Revisa la dirección de facturación y confirma
+
+29
+00:01:10,012 --> 00:01:12,406
+que coincida con tu país o región.
+
+30
+00:01:13,273 --> 00:01:16,625
+Puede aparecer una retención temporal de
+verificación.
+
+31
+00:01:18,107 --> 00:01:19,443
+Revisa tus datos,
+
+32
+00:01:19,609 --> 00:01:22,375
+la oferta gratuita y los consentimientos.
+
+33
+00:01:23,249 --> 00:01:26,244
+Lee las condiciones y completa el registro.
+
+34
+00:01:27,110 --> 00:01:30,863
+Sigue cualquier comprobación adicional que
+solicite Azure.
+
+35
+00:01:32,335 --> 00:01:34,229
+Una vez aprobado el registro,
+
+36
+00:01:34,395 --> 00:01:36,145
+entra al portal de Azure.
+
+37
+00:01:37,019 --> 00:01:39,636
+Busca Suscripciones y comprueba que la nueva
+
+38
+00:01:39,636 --> 00:01:42,125
+suscripción esté activa y corresponda a la
+
+39
+00:01:42,125 --> 00:01:43,589
+oferta que elegiste.

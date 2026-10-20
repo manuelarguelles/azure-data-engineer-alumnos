@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Generador de nombres Azure</title>
+<style>
+:root{--bg:#f7f9fc;--fg:#10223d;--ac:#0b5fd7;--mut:#51627d;--card:#fff;--ln:#d5deec;--ok:#0a7d3b;--bad:#b3261e}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1626;--fg:#e8eefb;--ac:#6aa8ff;--mut:#9fb0cc;--card:#16223a;--ln:#2a3a59;--ok:#4cd387;--bad:#ff8a80}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.45}
+main{max-width:980px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:1.6rem;margin:0 0 4px;color:var(--ac)}p.sub{margin:0 0 20px;color:var(--mut)}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:16px}
+label{display:flex;flex-direction:column;font-size:.85rem;color:var(--mut);gap:4px}
+input,select{font:inherit;padding:8px 10px;border:1px solid var(--ln);border-radius:6px;background:var(--bg);color:var(--fg)}
+.hint{font-size:.78rem;color:var(--mut)}.err{color:var(--bad)}
+table{width:100%;border-collapse:collapse;margin-top:20px;background:var(--card);border:1px solid var(--ln);font-size:.92rem}
+th,td{padding:9px 10px;border-bottom:1px solid var(--ln);text-align:left;vertical-align:top}th{background:var(--ac);color:#fff}
+code{font-family:ui-monospace,Consolas,"Cascadia Mono",monospace;font-size:.95em}
+td:nth-child(2) code{white-space:nowrap}
+.ok{color:var(--ok);font-weight:600}.bad{color:var(--bad);font-weight:600}
+button{font:inherit;border:1px solid var(--ac);background:transparent;color:var(--ac);border-radius:6px;padding:3px 9px;cursor:pointer}
+button:hover{background:var(--ac);color:#fff}
+.tags{margin-top:20px;background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:14px 16px}
+.tags code{display:block;margin:2px 0}
+.sol{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#solBtn{background:var(--ac);color:#fff;padding:9px 16px;font-weight:600}
+#solBtn:disabled{opacity:.45;cursor:not-allowed}
+.note{margin-top:16px;font-size:.82rem;color:var(--mut)}
+@media (max-width:700px){td:nth-child(2) code{white-space:normal;word-break:break-all}table{font-size:.8rem}th:nth-child(4),td:nth-child(4){display:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Generador de nombres Azure</h1>
+<p class="sub">Curso P.E. Data Engineer · Azure. Calcula y valida los nombres según el sistema del curso. Todo ocurre en tu navegador; no se envía nada.</p>
+
+<div class="form">
+  <label>Alumno (3 a 6 letras o números)
+    <input id="alumno" value="margue" maxlength="12" autocomplete="off" spellcheck="false">
+    <span class="hint">Inicial del nombre + apellido, sin tildes ni ñ.</span>
+    <span class="hint err" id="alumnoErr"></span></label>
+  <label>Carga de trabajo
+    <input id="carga" value="pede" maxlength="8" autocomplete="off" spellcheck="false"></label>
+  <label>Entorno
+    <select id="env"><option>dev</option></select></label>
+  <label>Región
+    <select id="reg"></select></label>
+  <label>Instancia
+    <input id="inst" value="001" maxlength="3" autocomplete="off" inputmode="numeric"></label>
+</div>
+
+<div class="sol"><button id="solBtn" type="button">Generar la solución completa</button>
+  <span class="hint" id="solMsg">Copia, listo para pegar en tu ficha, la tabla de los 6 nombres del paso 2 y las 5 etiquetas.</span></div>
+
+<table>
+<thead><tr><th>Recurso</th><th>Nombre</th><th>Estado</th><th>Regla de Azure</th><th></th></tr></thead>
+<tbody id="rows"></tbody>
+</table>
+
+<div class="tags"><strong>Etiquetas obligatorias</strong>
+  <code id="tags"></code>
+  <span class="hint">Pon la etiqueta <code style="display:inline">modulo</code> según el módulo en que creas el recurso (m01 a m05).</span></div>
+
+<p class="note">Reglas verificadas el 19-oct-2026 en la documentación de Microsoft (abreviaturas del Cloud Adoption Framework y reglas de nombres de Azure Resource Manager). Los códigos de región y la estructura son convenciones del curso. Sin datos personales ni confidenciales en nombres ni etiquetas.</p>
+</main>
+<script>
+const REGIONS={brs:"Brazil South",eus:"East US",eus2:"East US 2",cus:"Central US",scus:"South Central US",wus2:"West US 2",chc:"Chile Central"};
+const $=id=>document.getElementById(id);
+const regSel=$("reg");
+Object.entries(REGIONS).forEach(([k,v])=>{const o=document.createElement("option");o.value=k;o.textContent=`${k} · ${v}`;regSel.appendChild(o)});
+
+// tipo, patrón, largo mín-máx, regex de caracteres válidos, descripción, alcance
+const R=[
+ {t:"Grupo de recursos",abbr:"rg",f:p=>`rg-${p.c}-${p.a}-${p.e}-${p.r}-${p.i}`,min:1,max:90,re:/^[A-Za-z0-9_().-]+$/,extra:n=>!n.endsWith("."),d:"1-90 · letras, números, _ - . ( ) · no termina en punto · único en la suscripción"},
+ {t:"Cuenta de almacenamiento (ADLS Gen2)",abbr:"st",f:p=>`st${p.c}${p.a}dl${p.e}${p.r}${p.i}`,min:3,max:24,re:/^[a-z0-9]+$/,d:"3-24 · solo minúsculas y números · único en todo Azure"},
+ {t:"Servidor Azure SQL",abbr:"sql",f:p=>`sql-${p.c}-${p.a}-${p.e}-${p.r}-${p.i}`,min:1,max:63,re:/^[a-z0-9-]+$/,extra:n=>!/^-|-$/.test(n),d:"1-63 · minúsculas, números y guiones; no empieza ni termina en guion · único en todo Azure"},
+ {t:"Base de datos Azure SQL",abbr:"sqldb",f:p=>`sqldb-andina-ventas-${p.e}`,min:1,max:63,re:/^[A-Za-z0-9-]+$/,d:"1-63 · letras, números y guiones · único en el servidor"},
+ {t:"Azure Data Factory",abbr:"adf",f:p=>`adf-${p.c}-${p.a}-${p.e}-${p.r}-${p.i}`,min:3,max:63,re:/^[A-Za-z0-9-]+$/,extra:n=>/^[A-Za-z0-9]/.test(n)&&/[A-Za-z0-9]$/.test(n),d:"3-63 · letras, números y guiones; empieza y termina en letra o número · único en todo Azure"},
+ {t:"Workspace de Databricks",abbr:"dbw",f:p=>`dbw-${p.c}-${p.a}-${p.e}-${p.r}-${p.i}`,min:3,max:64,re:/^[A-Za-z0-9_-]+$/,d:"3-64 · letras, números, _ y - · único en el grupo de recursos"},
+ {t:"Key Vault",abbr:"kv",f:p=>`kv-${p.c}-${p.a}-${p.e}-${p.i}`,min:3,max:24,re:/^[A-Za-z0-9-]+$/,extra:n=>/^[A-Za-z]/.test(n)&&/[A-Za-z0-9]$/.test(n)&&!/--/.test(n),d:"3-24 · letras, números y guiones; empieza con letra, termina en letra o número; sin guiones seguidos · único en todo Azure · se omite la región"},
+ {t:"Log Analytics",abbr:"log",f:p=>`log-${p.c}-${p.a}-${p.e}-${p.r}-${p.i}`,min:4,max:63,re:/^[A-Za-z0-9-]+$/,extra:n=>/^[A-Za-z0-9]/.test(n)&&/[A-Za-z0-9]$/.test(n),d:"4-63 · letras, números y guiones; empieza y termina en letra o número"},
+ {t:"Identidad administrada",abbr:"id",f:p=>`id-adf-${p.c}-${p.a}-${p.e}-${p.i}`,min:3,max:128,re:/^[A-Za-z0-9_-]+$/,extra:n=>/^[A-Za-z0-9]/.test(n),d:"3-128 · letras, números, guiones y _ · empieza con letra o número"}
+];
+
+function check(r,n){
+  if(n.length<r.min||n.length>r.max) return `largo ${n.length} fuera de ${r.min}-${r.max}`;
+  if(!r.re.test(n)) return "tiene caracteres no permitidos";
+  if(r.extra && !r.extra(n)) return "incumple el formato de inicio/fin";
+  return "";
+}
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function render(){
+  const a=$("alumno").value.trim().toLowerCase(), c=$("carga").value.trim().toLowerCase();
+  const e=$("env").value, r=$("reg").value, i=$("inst").value.trim();
+  const aErr=!/^[a-z0-9]{3,6}$/.test(a)?"Usa de 3 a 6 letras minúsculas o números, sin tildes ni ñ.":"";
+  $("alumnoErr").textContent=aErr;
+  const p={a,c,e,r,i};
+  $("rows").innerHTML=R.map(x=>{
+    const n=x.f(p), why=aErr?"corrige el alumno":check(x,n);
+    return `<tr><td>${esc(x.t)} <span class="hint">(${x.abbr})</span></td><td><code>${esc(n)}</code></td>`+
+      `<td class="${why?"bad":"ok"}">${why?"✗ "+esc(why):"✓ válido"}</td><td class="hint">${esc(x.d)}</td>`+
+      `<td><button data-n="${esc(n)}" ${why?"disabled":""}>Copiar</button></td></tr>`;
+  }).join("");
+  $("tags").innerHTML=["curso = pede-azure-de","alumno = "+a,"entorno = "+e,"modulo = m01","vence = 2026-12-31"].map(t=>`<code>${esc(t)}</code>`).join("");
+}
+const FICHA=["rg","st","sql","adf","dbw","kv"];
+function solucion(){
+  const a=$("alumno").value.trim().toLowerCase(), c=$("carga").value.trim().toLowerCase();
+  const e=$("env").value, r=$("reg").value, i=$("inst").value.trim(), p={a,c,e,r,i};
+  if(!/^[a-z0-9]{3,6}$/.test(a)) return null;
+  const filas=FICHA.map(k=>R.find(x=>x.abbr===k)).map(x=>({x,n:x.f(p)}));
+  if(filas.some(f=>check(f.x,f.n))) return null;
+  return `Token de alumno: ${a} · Región (código): ${r} · Por qué esa región: ______\n\n| Recurso | Nombre generado |\n|---|---|\n`+
+    filas.map(f=>`| ${f.x.t} | ${f.n} |`).join("\n")+
+    `\n\nEtiquetas del grupo de recursos:\n- curso = pede-azure-de\n- alumno = ${a}\n- entorno = ${e}\n- modulo = m01\n- vence = 2026-12-31\n`;
+}
+function actualizaSol(){const ok=solucion()!==null;$("solBtn").disabled=!ok}
+$("solBtn").addEventListener("click",()=>{
+  const t=solucion(); if(!t) return;
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(
+    ()=>{$("solMsg").textContent="¡Copiado! Pégalo en la sección «Paso 2» de tu ficha."},
+    ()=>{$("solMsg").textContent="Tu navegador bloqueó el portapapeles; usa los botones Copiar de cada fila."});
+});
+document.addEventListener("input",()=>{render();actualizaSol()});
+document.addEventListener("click",ev=>{const b=ev.target.closest("button[data-n]");if(!b)return;
+  const n=b.dataset.n;(navigator.clipboard?navigator.clipboard.writeText(n):Promise.reject()).then(()=>{b.textContent="¡Copiado!"},()=>{b.textContent="Selecciona y copia"});
+  setTimeout(()=>b.textContent="Copiar",1400)});
+render();actualizaSol();
+</script>
+</body>
+</html>
