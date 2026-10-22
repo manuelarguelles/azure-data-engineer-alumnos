@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 650" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="1400" height="650" fill="#f7faf9"/>
+  <text x="40" y="45" font-size="26" font-weight="700" fill="#173b36">Fila vs columna: qué lee el motor cuando consultas una columna</text>
+  <text x="40" y="72" font-size="16" fill="#55706a">La misma tabla de pedidos; la consulta solo necesita `status` y `total`.</text>
+
+  <text x="40" y="125" font-size="18" font-weight="700" fill="#b26a2c">Almacenamiento por fila (CSV / SQL transaccional)</text>
+  <g font-size="14">
+    <rect x="40" y="145" width="580" height="330" rx="12" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+    <text x="60" y="178" font-size="14" fill="#55706a">fila 1</text>
+    <text x="140" y="178" font-size="14" fill="#173b36">p-1001 · c-001 · Ana · 435.06 · pagado</text>
+    <text x="60" y="214" font-size="14" fill="#55706a">fila 2</text>
+    <text x="140" y="214" font-size="14" fill="#173b36">p-1002 · c-002 · Luis · 378.00 · pagado</text>
+    <text x="60" y="250" font-size="14" fill="#55706a">fila 3</text>
+    <text x="140" y="250" font-size="14" fill="#173b36">p-1003 · c-003 · Carla · 0 · cancelado</text>
+    <text x="60" y="286" font-size="14" fill="#55706a">fila 4</text>
+    <text x="140" y="286" font-size="14" fill="#173b36">p-1004 · c-001 · Ana · 129.90 · pagado</text>
+    <text x="60" y="322" font-size="14" fill="#55706a">fila 5</text>
+    <text x="140" y="322" font-size="14" fill="#173b36">p-1005 · c-004 · Rosa · 89.90 · pagado</text>
+    <text x="60" y="370" font-size="14" fill="#b26a2c">Para leer status/total, recorre filas y descarta columnas.</text>
+    <text x="60" y="398" font-size="14" fill="#55706a">Bueno para escribir una fila completa y transacciones.</text>
+    <text x="60" y="426" font-size="14" fill="#55706a">Menos eficiente para escanear una sola columna.</text>
+  </g>
+
+  <text x="700" y="125" font-size="18" font-weight="700" fill="#0b6b5b">Almacenamiento por columna (Parquet / Delta)</text>
+  <g font-size="14">
+    <rect x="700" y="145" width="660" height="330" rx="12" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+    <text x="720" y="178" font-size="14" fill="#55706a">id</text>
+    <text x="820" y="178" font-size="14" fill="#173b36">p-1001 · p-1002 · p-1003 · p-1004 · p-1005</text>
+    <text x="720" y="214" font-size="14" fill="#55706a">cliente</text>
+    <text x="820" y="214" font-size="14" fill="#173b36">c-001 · c-002 · c-003 · c-001 · c-004</text>
+    <rect x="710" y="235" width="640" height="42" rx="6" fill="#d8f0e9"/>
+    <text x="720" y="261" font-size="14" font-weight="700" fill="#0b6b5b">status · pagado, pagado, cancelado, pagado, pagado</text>
+    <rect x="710" y="283" width="640" height="42" rx="6" fill="#d8f0e9"/>
+    <text x="720" y="309" font-size="14" font-weight="700" fill="#0b6b5b">total · 435.06, 378.00, 0, 129.90, 89.90</text>
+    <text x="720" y="360" font-size="14" fill="#0b6b5b">La consulta lee solo los bloques de status y total.</text>
+    <text x="720" y="388" font-size="14" fill="#55706a">Mejor compresión y menos IO en analítica.</text>
+    <text x="720" y="416" font-size="14" fill="#55706a">Más costo al escribir/actualizar una fila completa.</text>
+  </g>
+
+  <rect x="40" y="515" width="1320" height="75" rx="12" fill="#173b36"/>
+  <text x="62" y="545" font-size="16" font-weight="700" fill="#fff">No es “Parquet es mejor”: es “para esta consulta, columnar lee menos”.</text>
+  <text x="62" y="571" font-size="14" fill="#c9e8df">Transacción puntual → fila. Analítica de columnas → Parquet/Delta. Decisión por carga, no por moda.</text>
+</svg>

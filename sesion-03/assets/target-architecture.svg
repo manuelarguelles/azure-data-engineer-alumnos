@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 720" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="1400" height="720" fill="#f7faf9"/>
+  <text x="40" y="45" font-size="26" font-weight="700" fill="#173b36">Arquitectura objetivo de Andina: del origen a la decisión</text>
+  <text x="40" y="72" font-size="16" fill="#55706a">Una sola plataforma, capas separadas y gobierno transversal.</text>
+
+  <rect x="40" y="120" width="240" height="380" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+  <text x="62" y="154" font-size="18" font-weight="700" fill="#173b36">Orígenes</text>
+  <text x="62" y="190" font-size="14" fill="#55706a">SQL de pedidos</text>
+  <text x="62" y="216" font-size="14" fill="#55706a">CSV de productos</text>
+  <text x="62" y="242" font-size="14" fill="#55706a">Eventos de clic</text>
+  <text x="62" y="268" font-size="14" fill="#55706a">PDFs y logs</text>
+  <text x="62" y="294" font-size="14" fill="#55706a">APIs externas</text>
+  <text x="62" y="340" font-size="14" fill="#b26a2c">Batch + streaming</text>
+  <text x="62" y="364" font-size="14" fill="#55706a">Distintos dueños y SLAs.</text>
+
+  <rect x="320" y="120" width="260" height="380" rx="14" fill="#f6e3cf" stroke="#b26a2c" stroke-width="2"/>
+  <text x="342" y="154" font-size="18" font-weight="700" fill="#8a4b12">Ingesta</text>
+  <text x="342" y="190" font-size="14" fill="#173b36">Data Factory</text>
+  <text x="342" y="216" font-size="14" fill="#173b36">Event Hubs / streaming</text>
+  <text x="342" y="242" font-size="14" fill="#173b36">Conectores y APIs</text>
+  <text x="342" y="278" font-size="14" fill="#55706a">Frecuencia, reintentos,</text>
+  <text x="342" y="302" font-size="14" fill="#55706a">ventanas y validación inicial.</text>
+  <text x="342" y="350" font-size="14" fill="#8a4b12">Pregunta: ¿cuándo debe estar</text>
+  <text x="342" y="374" font-size="14" fill="#8a4b12">disponible y con qué latencia?</text>
+
+  <rect x="620" y="120" width="330" height="380" rx="14" fill="#e7eef7" stroke="#3d6fa8" stroke-width="2"/>
+  <text x="642" y="154" font-size="18" font-weight="700" fill="#244f7a">ADLS Gen2 · zonas</text>
+  <rect x="642" y="180" width="286" height="64" rx="8" fill="#f6e3cf"/>
+  <text x="658" y="205" font-size="14" font-weight="700" fill="#8a4b12">bronze/</text>
+  <text x="658" y="228" font-size="13" fill="#55706a">crudo, historial, linaje</text>
+  <rect x="642" y="256" width="286" height="64" rx="8" fill="#e7eef7"/>
+  <text x="658" y="281" font-size="14" font-weight="700" fill="#244f7a">silver/</text>
+  <text x="658" y="304" font-size="13" fill="#55706a">limpio, tipado, deduplicado</text>
+  <rect x="642" y="332" width="286" height="64" rx="8" fill="#e2f3e9"/>
+  <text x="658" y="357" font-size="14" font-weight="700" fill="#0b6b5b">gold/</text>
+  <text x="658" y="380" font-size="13" fill="#55706a">agregados para negocio</text>
+  <text x="642" y="430" font-size="14" fill="#244f7a">Delta Lake / Parquet</text>
+  <text x="642" y="456" font-size="14" fill="#55706a">Particiones por fecha y caso.</text>
+
+  <rect x="990" y="120" width="180" height="380" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+  <text x="1012" y="154" font-size="18" font-weight="700" fill="#173b36">Cómputo</text>
+  <text x="1012" y="190" font-size="14" fill="#55706a">Databricks</text>
+  <text x="1012" y="216" font-size="14" fill="#55706a">Spark / SQL</text>
+  <text x="1012" y="242" font-size="14" fill="#55706a">Jobs y notebooks</text>
+  <text x="1012" y="278" font-size="14" fill="#55706a">Transforma bronce → plata</text>
+  <text x="1012" y="302" font-size="14" fill="#55706a">y plata → oro.</text>
+  <text x="1012" y="350" font-size="14" fill="#b26a2c">Costo por cómputo,</text>
+  <text x="1012" y="374" font-size="14" fill="#55706a">no por almacenamiento.</text>
+
+  <rect x="1210" y="120" width="150" height="380" rx="14" fill="#e2f3e9" stroke="#0b6b5b" stroke-width="2"/>
+  <text x="1232" y="154" font-size="18" font-weight="700" fill="#0b6b5b">Consumo</text>
+  <text x="1232" y="190" font-size="14" fill="#173b36">Power BI</text>
+  <text x="1232" y="216" font-size="14" fill="#173b36">APIs</text>
+  <text x="1232" y="242" font-size="14" fill="#173b36">Modelos</text>
+  <text x="1232" y="278" font-size="14" fill="#55706a">Analistas y apps</text>
+  <text x="1232" y="304" font-size="14" fill="#55706a">leen oro.</text>
+
+  <path d="M280 310 H310" stroke="#b26a2c" stroke-width="4"/>
+  <path d="M580 310 H610" stroke="#3d6fa8" stroke-width="4"/>
+  <path d="M950 310 H980" stroke="#173b36" stroke-width="4"/>
+  <path d="M1170 310 H1200" stroke="#0b6b5b" stroke-width="4"/>
+
+  <rect x="40" y="545" width="1320" height="120" rx="12" fill="#173b36"/>
+  <text x="62" y="575" font-size="17" font-weight="700" fill="#fff">Transversal: identidad, RBAC/ACL, cifrado, catálogo, linaje, calidad y costo.</text>
+  <text x="62" y="603" font-size="14" fill="#c9e8df">No es una capa al final: se diseña con cada zona. Sin gobierno, el lago se vuelve un pantano.</text>
+  <text x="62" y="631" font-size="14" fill="#9fe3d3">S03 decide la arquitectura; S04 construye el lago; S05–S08 conectan cómputo, pipelines y capstone.</text>
+</svg>

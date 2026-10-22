@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 620" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="1400" height="620" fill="#f7faf9"/>
+  <text x="40" y="45" font-size="26" font-weight="700" fill="#173b36">El ciclo de vida del dato: cuatro fases, no una</text>
+  <text x="40" y="72" font-size="16" fill="#55706a">Cada fase tiene decisiones distintas: origen, formato, motor, costo y control.</text>
+  <g>
+    <rect x="40" y="130" width="290" height="300" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+    <rect x="40" y="130" width="290" height="52" rx="14" fill="#0b6b5b"/>
+    <text x="62" y="163" font-size="20" font-weight="700" fill="#fff">1 · Ingesta</text>
+    <text x="62" y="212" font-size="15" font-weight="700" fill="#173b36">¿Cómo llega?</text>
+    <text x="62" y="240" font-size="14" fill="#3f5b55">Batch: archivos, SQL, APIs</text>
+    <text x="62" y="266" font-size="14" fill="#3f5b55">Streaming: clics, sensores</text>
+    <text x="62" y="292" font-size="14" fill="#3f5b55">Frecuencia y latencia</text>
+    <text x="62" y="330" font-size="15" font-weight="700" fill="#173b36">Andina</text>
+    <text x="62" y="356" font-size="14" fill="#55706a">CSV de pedidos, eventos</text>
+    <text x="62" y="380" font-size="14" fill="#55706a">de clic, PDFs, logs</text>
+  </g>
+  <g>
+    <rect x="370" y="130" width="290" height="300" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+    <rect x="370" y="130" width="290" height="52" rx="14" fill="#b26a2c"/>
+    <text x="392" y="163" font-size="20" font-weight="700" fill="#fff">2 · Almacenamiento</text>
+    <text x="392" y="212" font-size="15" font-weight="700" fill="#173b36">¿Dónde vive?</text>
+    <text x="392" y="240" font-size="14" fill="#3f5b55">Archivo: CSV, JSON, Parquet</text>
+    <text x="392" y="266" font-size="14" fill="#3f5b55">Tabla: warehouse, lakehouse</text>
+    <text x="392" y="292" font-size="14" fill="#3f5b55">Zonas: bronce, plata, oro</text>
+    <text x="392" y="330" font-size="15" font-weight="700" fill="#173b36">Decisión</text>
+    <text x="392" y="356" font-size="14" fill="#55706a">Costo, retención, linaje,</text>
+    <text x="392" y="380" font-size="14" fill="#55706a">acceso y residencia</text>
+  </g>
+  <g>
+    <rect x="700" y="130" width="290" height="300" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+    <rect x="700" y="130" width="290" height="52" rx="14" fill="#0b6b5b"/>
+    <text x="722" y="163" font-size="20" font-weight="700" fill="#fff">3 · Procesamiento</text>
+    <text x="722" y="212" font-size="15" font-weight="700" fill="#173b36">¿Cómo se transforma?</text>
+    <text x="722" y="240" font-size="14" fill="#3f5b55">ETL o ELT</text>
+    <text x="722" y="266" font-size="14" fill="#3f5b55">Batch o streaming</text>
+    <text x="722" y="292" font-size="14" fill="#3f5b55">Spark, SQL, pipelines</text>
+    <text x="722" y="330" font-size="15" font-weight="700" fill="#173b36">Andina</text>
+    <text x="722" y="356" font-size="14" fill="#55706a">Limpiar, deduplicar,</text>
+    <text x="722" y="380" font-size="14" fill="#55706a">unir y validar</text>
+  </g>
+  <g>
+    <rect x="1030" y="130" width="330" height="300" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+    <rect x="1030" y="130" width="330" height="52" rx="14" fill="#b26a2c"/>
+    <text x="1052" y="163" font-size="20" font-weight="700" fill="#fff">4 · Exploración</text>
+    <text x="1052" y="212" font-size="15" font-weight="700" fill="#173b36">¿Quién decide?</text>
+    <text x="1052" y="240" font-size="14" fill="#3f5b55">BI, analistas, científicos</text>
+    <text x="1052" y="266" font-size="14" fill="#3f5b55">Dashboards, modelos, APIs</text>
+    <text x="1052" y="292" font-size="14" fill="#3f5b55">Preguntas y experimentos</text>
+    <text x="1052" y="330" font-size="15" font-weight="700" fill="#173b36">Andina</text>
+    <text x="1052" y="356" font-size="14" fill="#55706a">Ventas, churn,</text>
+    <text x="1052" y="380" font-size="14" fill="#55706a">inventario, campañas</text>
+  </g>
+  <path d="M330 280 H360" stroke="#0b6b5b" stroke-width="4"/>
+  <path d="M660 280 H690" stroke="#0b6b5b" stroke-width="4"/>
+  <path d="M990 280 H1020" stroke="#0b6b5b" stroke-width="4"/>
+  <rect x="40" y="500" width="1320" height="75" rx="12" fill="#173b36"/>
+  <text x="62" y="530" font-size="16" font-weight="700" fill="#fff">El error común: elegir el motor antes de entender la fase y la pregunta.</text>
+  <text x="62" y="556" font-size="14" fill="#c9e8df">Primero define el origen, la latencia, el formato y el control; después el servicio de Azure.</text>
+</svg>

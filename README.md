@@ -34,4 +34,14 @@ GitHub muestra los archivos `.html` como código. Para verlos funcionando:
 
 **Importante:** el servidor es compartido y cada alumno tiene su propio **usuario y schema**. Usa los scripts personalizados que recibiste por correo; los scripts del repo usan `dbo` solo como referencia. No uses el login del instructor.
 
+## Sesión 3 · Big Data, lago y lakehouse
+
+| Recurso | Qué es |
+|---|---|
+| [Deck de la sesión](sesion-03/S03-deck.html) | 31 slides: Big Data, 4 V, ciclo de vida, formatos, warehouse/lake/lakehouse y arquitectura. |
+| [Consigna del laboratorio](sesion-03/lab/CONSIGNA.md) | Diseño de lakehouse para Andina, 35 min. |
+| [Plantilla de diseño](sesion-03/lab/plantilla-diseno.md) | Formato de `entrega-s03.md`. |
+
+**Idea central:** S03 decide la arquitectura; S04 construye ADLS Gen2, las zonas y las ACL.
+
 No subas aquí datos personales, claves ni tokens.

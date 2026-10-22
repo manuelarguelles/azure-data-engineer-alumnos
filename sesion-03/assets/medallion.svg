@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="1400" height="700" fill="#f7faf9"/>
+  <text x="40" y="45" font-size="26" font-weight="700" fill="#173b36">Medallion: bronce, plata y oro sobre el mismo lago</text>
+  <text x="40" y="72" font-size="16" fill="#55706a">Cada zona agrega confianza y quita detalle; no son copias porque sí.</text>
+
+  <rect x="40" y="120" width="250" height="390" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+  <text x="62" y="154" font-size="18" font-weight="700" fill="#173b36">Fuentes</text>
+  <text x="62" y="190" font-size="14" fill="#55706a">SQL de pedidos</text>
+  <text x="62" y="216" font-size="14" fill="#55706a">CSV de productos</text>
+  <text x="62" y="242" font-size="14" fill="#55706a">JSON de clics</text>
+  <text x="62" y="268" font-size="14" fill="#55706a">PDFs de facturas</text>
+  <text x="62" y="294" font-size="14" fill="#55706a">Logs de la app</text>
+  <text x="62" y="340" font-size="14" fill="#b26a2c">Crudo, heterogéneo,</text>
+  <text x="62" y="364" font-size="14" fill="#b26a2c">con errores y duplicados.</text>
+
+  <rect x="330" y="120" width="300" height="390" rx="14" fill="#f6e3cf" stroke="#b26a2c" stroke-width="2"/>
+  <text x="352" y="154" font-size="18" font-weight="700" fill="#8a4b12">Bronce · raw</text>
+  <text x="352" y="190" font-size="14" fill="#173b36">Copia fiel del origen</text>
+  <text x="352" y="216" font-size="14" fill="#173b36">Historial y linaje</text>
+  <text x="352" y="242" font-size="14" fill="#173b36">Sin limpieza de negocio</text>
+  <text x="352" y="278" font-size="14" fill="#55706a">Formato: CSV/JSON/Parquet</text>
+  <text x="352" y="304" font-size="14" fill="#55706a">Partición por fecha de carga</text>
+  <text x="352" y="350" font-size="14" fill="#8a4b12">Pregunta: ¿podemos reconstruir</text>
+  <text x="352" y="374" font-size="14" fill="#8a4b12">lo que llegó y cuándo?</text>
+
+  <rect x="670" y="120" width="300" height="390" rx="14" fill="#e7eef7" stroke="#3d6fa8" stroke-width="2"/>
+  <text x="692" y="154" font-size="18" font-weight="700" fill="#244f7a">Plata · curated</text>
+  <text x="692" y="190" font-size="14" fill="#173b36">Limpieza y tipado</text>
+  <text x="692" y="216" font-size="14" fill="#173b36">Deduplicación y reglas</text>
+  <text x="692" y="242" font-size="14" fill="#173b36">Cruces entre fuentes</text>
+  <text x="692" y="278" font-size="14" fill="#55706a">Formato: Delta/Parquet</text>
+  <text x="692" y="304" font-size="14" fill="#55706a">Partición por fecha de negocio</text>
+  <text x="692" y="350" font-size="14" fill="#244f7a">Pregunta: ¿el dato es confiable</text>
+  <text x="692" y="374" font-size="14" fill="#244f7a">y se puede cruzar?</text>
+
+  <rect x="1010" y="120" width="350" height="390" rx="14" fill="#e2f3e9" stroke="#0b6b5b" stroke-width="2"/>
+  <text x="1032" y="154" font-size="18" font-weight="700" fill="#0b6b5b">Oro · serving</text>
+  <text x="1032" y="190" font-size="14" fill="#173b36">Agregados por negocio</text>
+  <text x="1032" y="216" font-size="14" fill="#173b36">Tablas listas para BI/API</text>
+  <text x="1032" y="242" font-size="14" fill="#173b36">Métricas y dimensiones</text>
+  <text x="1032" y="278" font-size="14" fill="#55706a">Formato: Delta/tabla</text>
+  <text x="1032" y="304" font-size="14" fill="#55706a">Consumo: Power BI, apps</text>
+  <text x="1032" y="350" font-size="14" fill="#0b6b5b">Pregunta: ¿responde la pregunta</text>
+  <text x="1032" y="374" font-size="14" fill="#0b6b5b">de negocio sin recalcular todo?</text>
+
+  <path d="M290 315 H320" stroke="#b26a2c" stroke-width="4"/>
+  <path d="M630 315 H660" stroke="#3d6fa8" stroke-width="4"/>
+  <path d="M970 315 H1000" stroke="#0b6b5b" stroke-width="4"/>
+
+  <rect x="40" y="565" width="1320" height="80" rx="12" fill="#173b36"/>
+  <text x="62" y="595" font-size="16" font-weight="700" fill="#fff">Regla: cada zona tiene un dueño, una pregunta y una prueba de calidad.</text>
+  <text x="62" y="621" font-size="14" fill="#c9e8df">Si no puedes explicar qué pregunta responde una zona, probablemente sea una copia innecesaria.</text>
+</svg>
