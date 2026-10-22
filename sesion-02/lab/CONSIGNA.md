@@ -29,7 +29,9 @@ Al terminar vas a tener tus cinco tablas en tu schema, los datos cargados y una 
 | Password | la del correo |
 | Schema por defecto | tu usuario del correo |
 
-**SSMS:** si aparece el error `53 / 40`, usa el nombre así:
+**SSMS:** no dejes **Database Name** en `<default>`; selecciona `sqldb-pede-demo-dev-brs-001`. Si lo dejas en `<default>`, el login intenta abrir `master` y aparece el error `916`.
+
+Si aparece el error `53 / 40`, usa el nombre así:
 
 ```text
 tcp:sql-pede-nix-dev-brs-001.database.windows.net,1433
