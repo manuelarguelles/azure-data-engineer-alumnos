@@ -25,7 +25,7 @@ Si solo tienes los scripts del repo, reemplaza `dbo.` por `[tu_usuario].` antes 
 Los datos exactos de servidor, base, usuario y contraseña están en tu correo de accesos. No los publiques ni los compartas.
 
 - **DBeaver:** conexión SQL Server, puerto `1433`, SQL Server Authentication.
-- **SSMS (Windows):** `tcp:<servidor>,1433` si aparece error `53/40`.
+- **SSMS (Windows):** escribe el servidor terminando en `,1433`; si aparece `53/40`, usa `tcp:<servidor>,1433`.
 - **Sin instalar nada:** Query editor del portal con tu usuario.
 
 Si aparece `40615`, tu IP no está habilitada: responde el correo con tu IPv4 de <https://api.ipify.org>.

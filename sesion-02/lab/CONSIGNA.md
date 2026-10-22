@@ -29,13 +29,21 @@ Al terminar vas a tener tus cinco tablas en tu schema, los datos cargados y una 
 | Password | la del correo |
 | Schema por defecto | tu usuario del correo |
 
-**SSMS:** no dejes **Database Name** en `<default>`; selecciona `sqldb-pede-demo-dev-brs-001`. Si lo dejas en `<default>`, el login intenta abrir `master` y aparece el error `916`.
+**SSMS:** escribe el servidor con `,1433` al final:
 
-Si aparece el error `53 / 40`, usa el nombre así:
+```text
+sql-pede-nix-dev-brs-001.database.windows.net,1433
+```
+
+No dejes **Database Name** en `<default>`; selecciona `sqldb-pede-demo-dev-brs-001`. Si lo dejas en `<default>`, el login intenta abrir `master` y aparece el error `916`.
+
+Si aparece el error `53 / 40`, usa el prefijo `tcp:`:
 
 ```text
 tcp:sql-pede-nix-dev-brs-001.database.windows.net,1433
 ```
+
+El admin del servidor se define en **Create SQL Database Server**, no en la base. Tú no lo usas: usas el usuario personal que llegó por correo.
 
 **DBeaver:** crea una conexión **SQL Server**. Si no ves tu schema, activa **Show All Schemas** en la configuración de la conexión.
 
