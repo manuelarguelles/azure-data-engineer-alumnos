@@ -1,0 +1,6 @@
+customer_id,full_name,email,city,signup_date
+1,Ana Torres,ana.torres@example.com,Lima,2026-09-15
+2,Luis Ramírez,luis.ramirez@example.com,Arequipa,2026-09-18
+3,Carla Mendoza,carla.mendoza@example.com,Trujillo,2026-09-22
+4,Diego Salazar,diego.salazar@example.com,Cusco,2026-10-01
+5,María Paredes,maria.paredes@example.com,Lima,2026-10-05

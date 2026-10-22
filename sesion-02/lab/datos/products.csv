@@ -1,0 +1,9 @@
+product_id,name,category,unit_price,active
+101,Laptop 14 Pro,Tecnología,3499.00,1
+102,Mouse inalámbrico,Accesorios,89.90,1
+103,Teclado mecánico,Accesorios,249.00,1
+104,Monitor 27 4K,Tecnología,1299.00,1
+105,Mochila urbana,Accesorios,159.90,1
+106,Tablet 11,Tecnología,1899.00,0
+107,Hub USB-C,Accesorios,129.00,1
+108,Webcam Full HD,Accesorios,219.00,1

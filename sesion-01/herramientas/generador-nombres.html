@@ -51,7 +51,7 @@ button:hover{background:var(--ac);color:#fff}
 </div>
 
 <div class="sol"><button id="solBtn" type="button">Generar la solución completa</button>
-  <span class="hint" id="solMsg">Copia, listo para pegar en tu ficha, la tabla de los 6 nombres del paso 2 y las 5 etiquetas.</span></div>
+  <span class="hint" id="solMsg">Copia, listo para pegar en tu ficha, la tabla de los 7 nombres del paso 2 y las 5 etiquetas.</span></div>
 
 <table>
 <thead><tr><th>Recurso</th><th>Nombre</th><th>Estado</th><th>Regla de Azure</th><th></th></tr></thead>
@@ -75,7 +75,7 @@ const R=[
  {t:"Grupo de recursos",abbr:"rg",f:p=>`rg-${p.c}-${p.a}-${p.e}-${p.r}-${p.i}`,min:1,max:90,re:/^[A-Za-z0-9_().-]+$/,extra:n=>!n.endsWith("."),d:"1-90 · letras, números, _ - . ( ) · no termina en punto · único en la suscripción"},
  {t:"Cuenta de almacenamiento (ADLS Gen2)",abbr:"st",f:p=>`st${p.c}${p.a}dl${p.e}${p.r}${p.i}`,min:3,max:24,re:/^[a-z0-9]+$/,d:"3-24 · solo minúsculas y números · único en todo Azure"},
  {t:"Servidor Azure SQL",abbr:"sql",f:p=>`sql-${p.c}-${p.a}-${p.e}-${p.r}-${p.i}`,min:1,max:63,re:/^[a-z0-9-]+$/,extra:n=>!/^-|-$/.test(n),d:"1-63 · minúsculas, números y guiones; no empieza ni termina en guion · único en todo Azure"},
- {t:"Base de datos Azure SQL",abbr:"sqldb",f:p=>`sqldb-andina-ventas-${p.e}`,min:1,max:63,re:/^[A-Za-z0-9-]+$/,d:"1-63 · letras, números y guiones · único en el servidor"},
+ {t:"Base de datos Azure SQL",abbr:"sqldb",f:p=>`sqldb-${p.c}-${p.a}-${p.e}-${p.r}-${p.i}`,min:1,max:63,re:/^[A-Za-z0-9-]+$/,d:"1-63 · letras, números y guiones · único en el servidor"},
  {t:"Azure Data Factory",abbr:"adf",f:p=>`adf-${p.c}-${p.a}-${p.e}-${p.r}-${p.i}`,min:3,max:63,re:/^[A-Za-z0-9-]+$/,extra:n=>/^[A-Za-z0-9]/.test(n)&&/[A-Za-z0-9]$/.test(n),d:"3-63 · letras, números y guiones; empieza y termina en letra o número · único en todo Azure"},
  {t:"Workspace de Databricks",abbr:"dbw",f:p=>`dbw-${p.c}-${p.a}-${p.e}-${p.r}-${p.i}`,min:3,max:64,re:/^[A-Za-z0-9_-]+$/,d:"3-64 · letras, números, _ y - · único en el grupo de recursos"},
  {t:"Key Vault",abbr:"kv",f:p=>`kv-${p.c}-${p.a}-${p.e}-${p.i}`,min:3,max:24,re:/^[A-Za-z0-9-]+$/,extra:n=>/^[A-Za-z]/.test(n)&&/[A-Za-z0-9]$/.test(n)&&!/--/.test(n),d:"3-24 · letras, números y guiones; empieza con letra, termina en letra o número; sin guiones seguidos · único en todo Azure · se omite la región"},
@@ -104,7 +104,7 @@ function render(){
   }).join("");
   $("tags").innerHTML=["curso = pede-azure-de","alumno = "+a,"entorno = "+e,"modulo = m01","vence = 2026-12-31"].map(t=>`<code>${esc(t)}</code>`).join("");
 }
-const FICHA=["rg","st","sql","adf","dbw","kv"];
+const FICHA=["rg","st","sql","sqldb","adf","dbw","kv"];
 function solucion(){
   const a=$("alumno").value.trim().toLowerCase(), c=$("carga").value.trim().toLowerCase();
   const e=$("env").value, r=$("reg").value, i=$("inst").value.trim(), p={a,c,e,r,i};

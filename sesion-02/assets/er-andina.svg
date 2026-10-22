@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 760" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="1400" height="760" fill="#f7faf9"/>
+  <text x="60" y="50" font-size="30" font-weight="700" fill="#173b36">Andina Retail · modelo entidad-relación</text>
+  <text x="60" y="82" font-size="18" fill="#55706a">Cinco tablas, dos claves compuestas y tres relaciones uno-a-muchos</text>
+
+  <!-- customers -->
+  <rect x="60" y="120" width="270" height="170" rx="12" fill="#ffffff" stroke="#2f6f63" stroke-width="2"/>
+  <rect x="60" y="120" width="270" height="44" rx="12" fill="#2f6f63"/>
+  <text x="80" y="149" font-size="22" font-weight="700" fill="#ffffff">customers</text>
+  <text x="80" y="192" font-size="17" fill="#173b36" font-weight="700">PK customer_id</text>
+  <text x="80" y="220" font-size="16" fill="#3f5b55">full_name · email</text>
+  <text x="80" y="246" font-size="16" fill="#3f5b55">city · signup_date</text>
+  <text x="80" y="272" font-size="16" fill="#55706a">1 cliente → N pedidos</text>
+
+  <!-- orders -->
+  <rect x="400" y="120" width="270" height="190" rx="12" fill="#ffffff" stroke="#2f6f63" stroke-width="2"/>
+  <rect x="400" y="120" width="270" height="44" rx="12" fill="#2f6f63"/>
+  <text x="420" y="149" font-size="22" font-weight="700" fill="#ffffff">orders</text>
+  <text x="420" y="192" font-size="17" fill="#173b36" font-weight="700">PK order_id</text>
+  <text x="420" y="218" font-size="16" fill="#3f5b55">FK customer_id</text>
+  <text x="420" y="244" font-size="16" fill="#3f5b55">order_date · channel</text>
+  <text x="420" y="270" font-size="16" fill="#3f5b55">status</text>
+  <text x="420" y="296" font-size="16" fill="#55706a">1 pedido → N líneas / 1 pago</text>
+
+  <!-- payments -->
+  <rect x="740" y="120" width="290" height="170" rx="12" fill="#ffffff" stroke="#2f6f63" stroke-width="2"/>
+  <rect x="740" y="120" width="290" height="44" rx="12" fill="#2f6f63"/>
+  <text x="760" y="149" font-size="22" font-weight="700" fill="#ffffff">payments</text>
+  <text x="760" y="192" font-size="17" fill="#173b36" font-weight="700">PK payment_id</text>
+  <text x="760" y="218" font-size="16" fill="#3f5b55">FK order_id</text>
+  <text x="760" y="244" font-size="16" fill="#3f5b55">paid_at · method · amount</text>
+  <text x="760" y="272" font-size="16" fill="#55706a">Máximo un pago por pedido</text>
+
+  <!-- products -->
+  <rect x="400" y="460" width="270" height="170" rx="12" fill="#ffffff" stroke="#b26a2c" stroke-width="2"/>
+  <rect x="400" y="460" width="270" height="44" rx="12" fill="#b26a2c"/>
+  <text x="420" y="489" font-size="22" font-weight="700" fill="#ffffff">products</text>
+  <text x="420" y="532" font-size="17" fill="#173b36" font-weight="700">PK product_id</text>
+  <text x="420" y="558" font-size="16" fill="#3f5b55">name · category</text>
+  <text x="420" y="584" font-size="16" fill="#3f5b55">unit_price · active</text>
+  <text x="420" y="610" font-size="16" fill="#55706a">1 producto → N líneas</text>
+
+  <!-- order_items -->
+  <rect x="740" y="440" width="310" height="210" rx="12" fill="#ffffff" stroke="#b26a2c" stroke-width="2"/>
+  <rect x="740" y="440" width="310" height="44" rx="12" fill="#b26a2c"/>
+  <text x="760" y="469" font-size="22" font-weight="700" fill="#ffffff">order_items</text>
+  <text x="760" y="512" font-size="17" fill="#173b36" font-weight="700">PK (order_id, product_id)</text>
+  <text x="760" y="538" font-size="16" fill="#3f5b55">FK order_id · FK product_id</text>
+  <text x="760" y="564" font-size="16" fill="#3f5b55">quantity · unit_price</text>
+  <text x="760" y="590" font-size="16" fill="#55706a">Resuelve el muchos-a-muchos</text>
+  <text x="760" y="616" font-size="16" fill="#55706a">y conserva el precio histórico</text>
+
+  <!-- relationships -->
+  <line x1="330" y1="205" x2="400" y2="205" stroke="#173b36" stroke-width="3"/>
+  <text x="345" y="193" font-size="18" font-weight="700" fill="#173b36">1</text>
+  <text x="382" y="238" font-size="18" font-weight="700" fill="#173b36">N</text>
+
+  <line x1="670" y1="205" x2="740" y2="205" stroke="#173b36" stroke-width="3"/>
+  <text x="683" y="193" font-size="18" font-weight="700" fill="#173b36">1</text>
+  <text x="719" y="238" font-size="18" font-weight="700" fill="#173b36">1</text>
+
+  <path d="M535 310 V390 H895 V440" fill="none" stroke="#b26a2c" stroke-width="3"/>
+  <text x="545" y="332" font-size="18" font-weight="700" fill="#b26a2c">1</text>
+  <text x="875" y="432" font-size="18" font-weight="700" fill="#b26a2c">N</text>
+
+  <line x1="670" y1="545" x2="740" y2="545" stroke="#b26a2c" stroke-width="3"/>
+  <text x="683" y="533" font-size="18" font-weight="700" fill="#b26a2c">1</text>
+  <text x="719" y="578" font-size="18" font-weight="700" fill="#b26a2c">N</text>
+
+  <text x="60" y="720" font-size="16" fill="#55706a">PK = clave primaria · FK = clave foránea · La barra indica “uno”; la letra N indica “muchos”.</text>
+</svg>

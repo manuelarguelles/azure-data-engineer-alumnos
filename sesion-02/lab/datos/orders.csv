@@ -1,0 +1,11 @@
+order_id,customer_id,order_date,channel,status
+1001,1,2026-10-10,web,pagado
+1002,2,2026-10-11,tienda,pagado
+1003,1,2026-10-12,web,pagado
+1004,3,2026-10-13,web,pagado
+1005,4,2026-10-14,tienda,pagado
+1006,5,2026-10-15,web,pagado
+1007,2,2026-10-16,web,cancelado
+1008,3,2026-10-17,tienda,pagado
+1009,4,2026-10-18,web,pagado
+1010,5,2026-10-19,web,pagado
