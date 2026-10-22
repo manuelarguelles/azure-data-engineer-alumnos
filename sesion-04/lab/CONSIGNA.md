@@ -1,7 +1,9 @@
 # Laboratorio S04 · Crear el lago ADLS Gen2 de Andina
 
 **Duración:** 40 min · **Modalidad:** individual · **Entregable:** `evidencia-s04.md`
-**Requisito:** acceso al portal de Azure y permiso para crear recursos en el grupo de S01/S02.
+**Requisito:** acceso al portal de Azure y permiso para crear recursos en el grupo de S01/S02. Los CSV de Andina están en `material/s02/lab/datos/` (o en el kit de S02).
+
+**Plan B sin suscripción:** usa la cuenta demo `stpededemobrs001` en modo lectura y completa la evidencia con capturas y la ACL observada; el instructor publica los resultados.
 
 ## Qué vas a demostrar
 
@@ -15,7 +17,7 @@ En el portal: **Storage accounts → Create**.
 |---|---|
 | Subscription | la del curso |
 | Resource group | `rg-pede-<alumno>-dev-<región>-001` |
-| Storage account name | `stpede<alumno>dev<región>001` (solo minúsculas y números) |
+| Storage account name | `stpede<alumno>dev001` (3–24, solo minúsculas y números, único global) |
 | Region | la misma del grupo |
 | Performance | Standard |
 | Redundancy | LRS |
@@ -49,11 +51,15 @@ Esperado: `customers.csv`, `products.csv`, `orders.csv`, `order_items.csv`, `pay
 
 ## Paso 4 · RBAC y ACL (10 min)
 
-1. En el contenedor `gold`, asigna a tu grupo de analistas el rol **Storage Blob Data Reader**.
-2. En `bronze`, define una ACL que no permita lectura al grupo de analistas.
-3. Deja `silver` solo para el equipo de datos.
+1. Crea un grupo `grp-analistas-datos` y agrega una segunda identidad de prueba.
+2. En la cuenta, asigna al grupo el rol **Reader** (plano de control), no un rol de datos.
+3. En `gold`, define una ACL `r-x` para `grp-analistas-datos`.
+4. En `bronze`, no des ACL de lectura al grupo.
+5. Prueba autenticando con Entra ID (**nunca con clave de cuenta**):
+   - `gold` debe listar y leer;
+   - `bronze` debe devolver 403 de autorización.
 
-**Verificación:** con una cuenta sin ACL en `bronze`, la lectura falla; en `gold` funciona.
+**Verificación:** la lectura de `bronze` falla con identidad de Entra ID y el código 403; `gold` funciona. Si usas clave de cuenta, la prueba no vale: la clave omite el ACL.
 
 ## Paso 5 · Ciclo de vida y evidencia (7 min)
 

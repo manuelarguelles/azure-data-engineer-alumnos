@@ -9,7 +9,7 @@ Al terminar vas a tener una arquitectura de datos defendible: fuentes clasificad
 
 ## Paso 1 · Inventario de fuentes (5 min)
 
-Trabaja sobre las fuentes de Andina:
+Trabaja sobre las **8 fuentes de Andina** (no son las 5 tablas de S02):
 
 - SQL de pedidos y pagos
 - CSV de productos, clientes y ventas
@@ -76,4 +76,6 @@ Completa `plantilla-diseno.md` con:
 | Gobierno (PII, acceso, linaje, costo) | 2 |
 | Riesgo y Plan B | 1 |
 
-**No aprobado:** lista de servicios sin justificación, o una sola zona para todo sin explicar el supuesto.
+**Aprobación:** 7 de 10 puntos o más, con las secciones 1 a 5 completas. **No aprobado:** lista de servicios sin justificación, o una sola zona para todo sin explicar el supuesto.
+
+**Ejemplo resuelto (una fuente):** `JSON de clics` → bronce, streaming, Parquet en plata, partición por fecha de negocio, PII: userId seudonimizado, dueño: equipo de datos.
