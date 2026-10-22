@@ -44,4 +44,12 @@ GitHub muestra los archivos `.html` como código. Para verlos funcionando:
 
 **Idea central:** S03 decide la arquitectura; S04 construye ADLS Gen2, las zonas y las ACL.
 
+## Sesión 4 · Data lake y ADLS Gen2
+
+| Recurso | Qué es |
+|---|---|
+| [Deck de la sesión](sesion-04/S04-deck.html) | 21 slides: Blob vs ADLS, HNS, zonas, RBAC/ACL y ciclo de vida. |
+| [Consigna del laboratorio](sesion-04/lab/CONSIGNA.md) | Crear cuenta ADLS, contenedores, cargar CSV y probar permisos. |
+| [Plantilla de evidencia](sesion-04/lab/plantilla-evidencia.md) | Formato de `evidencia-s04.md`. |
+
 No subas aquí datos personales, claves ni tokens.

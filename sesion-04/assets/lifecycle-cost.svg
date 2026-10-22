@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 620" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="1400" height="620" fill="#f7faf9"/>
+  <text x="40" y="45" font-size="26" font-weight="700" fill="#173b36">Ciclo de vida y costo: no todo el lago vale lo mismo</text>
+  <text x="40" y="72" font-size="16" fill="#55706a">Mueve los datos según uso y retención; borra lo que ya no necesitas.</text>
+  <rect x="40" y="120" width="330" height="330" rx="14" fill="#f6e3cf" stroke="#b26a2c" stroke-width="2"/>
+  <text x="62" y="154" font-size="18" font-weight="700" fill="#8a4b12">Hot</text>
+  <text x="62" y="190" font-size="14" fill="#173b36">Acceso frecuente y baja latencia.</text>
+  <text x="62" y="216" font-size="14" fill="#173b36">Zona plata y oro activa.</text>
+  <text x="62" y="242" font-size="14" fill="#173b36">Costo de almacenamiento mayor.</text>
+  <text x="62" y="284" font-size="14" fill="#55706a">Ejemplo: ventas del mes y features de modelos.</text>
+  <text x="62" y="330" font-size="14" fill="#8a4b12">Pregunta: ¿se consulta todos los días?</text>
+  <rect x="400" y="120" width="330" height="330" rx="14" fill="#e7eef7" stroke="#3d6fa8" stroke-width="2"/>
+  <text x="422" y="154" font-size="18" font-weight="700" fill="#244f7a">Cool</text>
+  <text x="422" y="190" font-size="14" fill="#173b36">Acceso poco frecuente.</text>
+  <text x="422" y="216" font-size="14" fill="#173b36">Histórico de meses.</text>
+  <text x="422" y="242" font-size="14" fill="#173b36">Costo menor, latencia mayor.</text>
+  <text x="422" y="284" font-size="14" fill="#55706a">Ejemplo: pedidos del año pasado.</text>
+  <text x="422" y="330" font-size="14" fill="#244f7a">Pregunta: ¿lo consulto cada mes o cada día?</text>
+  <rect x="760" y="120" width="330" height="330" rx="14" fill="#e2f3e9" stroke="#0b6b5b" stroke-width="2"/>
+  <text x="782" y="154" font-size="18" font-weight="700" fill="#0b6b5b">Archive</text>
+  <text x="782" y="190" font-size="14" fill="#173b36">Retención legal o auditoría.</text>
+  <text x="782" y="216" font-size="14" fill="#173b36">Horas para rehidratar.</text>
+  <text x="782" y="242" font-size="14" fill="#173b36">El costo más bajo de almacenamiento.</text>
+  <text x="782" y="284" font-size="14" fill="#55706a">Ejemplo: facturas antiguas sin consulta diaria.</text>
+  <text x="782" y="330" font-size="14" fill="#0b6b5b">Pregunta: ¿lo necesito en minutos o en horas?</text>
+  <rect x="1120" y="120" width="240" height="330" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+  <text x="1142" y="154" font-size="18" font-weight="700" fill="#b3261e">Delete</text>
+  <text x="1142" y="190" font-size="14" fill="#173b36">Política de retención.</text>
+  <text x="1142" y="216" font-size="14" fill="#173b36">Datos temporales o duplicados.</text>
+  <text x="1142" y="242" font-size="14" fill="#173b36">Borrar también ahorra.</text>
+  <text x="1142" y="284" font-size="14" fill="#55706a">Ejemplo: logs de 7 días.</text>
+  <text x="1142" y="330" font-size="14" fill="#b3261e">Sin política, todo queda hot.</text>
+  <rect x="40" y="500" width="1320" height="80" rx="12" fill="#173b36"/>
+  <text x="62" y="530" font-size="16" font-weight="700" fill="#fff">El costo no es solo “cuánto guardo”: es “cuánto leo, muevo y dejo guardado”.</text>
+  <text x="62" y="556" font-size="14" fill="#c9e8df">Particiones, formato, compresión, ciclo de vida y borrado son palancas de diseño.</text>
+</svg>

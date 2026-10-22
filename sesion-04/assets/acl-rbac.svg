@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 620" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="1400" height="620" fill="#f7faf9"/>
+  <text x="40" y="45" font-size="26" font-weight="700" fill="#173b36">RBAC y ACL: dos planos de control distintos</text>
+  <text x="40" y="72" font-size="16" fill="#55706a">RBAC controla el recurso de Azure; ACL controla archivos y carpetas dentro del lago.</text>
+  <rect x="40" y="120" width="620" height="360" rx="14" fill="#e7eef7" stroke="#3d6fa8" stroke-width="2"/>
+  <text x="62" y="154" font-size="18" font-weight="700" fill="#244f7a">Plano de control · RBAC</text>
+  <text x="62" y="190" font-size="14" fill="#55706a">¿Quién puede administrar el recurso?</text>
+  <text x="62" y="226" font-size="15" fill="#173b36">Storage Blob Data Reader</text>
+  <text x="62" y="252" font-size="15" fill="#173b36">Storage Blob Data Contributor</text>
+  <text x="62" y="278" font-size="15" fill="#173b36">Owner / Contributor del recurso</text>
+  <text x="62" y="320" font-size="14" fill="#3d6fa8">Se asigna a usuarios, grupos o identidades administradas.</text>
+  <text x="62" y="346" font-size="14" fill="#3d6fa8">Aplica a la cuenta o al contenedor.</text>
+  <text x="62" y="372" font-size="14" fill="#3d6fa8">No distingue carpetas internas.</text>
+  <text x="62" y="420" font-size="14" fill="#55706a">Ejemplo: el equipo de datos es Contributor en el contenedor plata.</text>
+  <rect x="700" y="120" width="660" height="360" rx="14" fill="#f6e3cf" stroke="#b26a2c" stroke-width="2"/>
+  <text x="722" y="154" font-size="18" font-weight="700" fill="#8a4b12">Plano de datos · ACL POSIX</text>
+  <text x="722" y="190" font-size="14" fill="#55706a">¿Quién puede leer/escribir una carpeta o archivo?</text>
+  <text x="722" y="226" font-size="15" fill="#173b36">owner : group : other</text>
+  <text x="722" y="252" font-size="15" fill="#173b36">rwx r-x ---</text>
+  <text x="722" y="278" font-size="15" fill="#173b36">default ACL para hijos nuevos</text>
+  <text x="722" y="320" font-size="14" fill="#8a4b12">Se aplica a carpetas y archivos concretos del lago.</text>
+  <text x="722" y="346" font-size="14" fill="#8a4b12">Permite mínimo privilegio por zona.</text>
+  <text x="722" y="372" font-size="14" fill="#8a4b12">Se hereda desde la carpeta padre si defines default.</text>
+  <text x="722" y="420" font-size="14" fill="#55706a">Ejemplo: analistas leen oro, no bronce crudo con PII.</text>
+  <rect x="40" y="520" width="1320" height="70" rx="12" fill="#173b36"/>
+  <text x="62" y="550" font-size="16" font-weight="700" fill="#fff">Regla: primero RBAC para el recurso, después ACL para el dato.</text>
+  <text x="62" y="574" font-size="14" fill="#c9e8df">Tener Contributor en la cuenta no significa poder leer todos los archivos: el ACL del lago decide.</text>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 620" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="1400" height="620" fill="#f7faf9"/>
+  <text x="40" y="45" font-size="26" font-weight="700" fill="#173b36">Blob plano vs ADLS Gen2: la jerarquía cambia la operación</text>
+  <text x="40" y="72" font-size="16" fill="#55706a">Mismo servicio de almacenamiento; el hierarchical namespace agrega carpetas reales y operaciones atómicas.</text>
+  <rect x="40" y="120" width="620" height="360" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+  <text x="62" y="154" font-size="18" font-weight="700" fill="#b26a2c">Blob Storage sin HNS</text>
+  <text x="62" y="190" font-size="14" fill="#55706a">Nombres con “/”, pero no hay carpetas reales.</text>
+  <text x="62" y="226" font-size="15" fill="#173b36">bronze/2026/10/10/orders.csv</text>
+  <text x="62" y="252" font-size="15" fill="#173b36">bronze/2026/10/10/products.csv</text>
+  <text x="62" y="278" font-size="15" fill="#173b36">bronze/2026/10/11/orders.csv</text>
+  <text x="62" y="320" font-size="14" fill="#b26a2c">Renombrar “2026” implica copiar y borrar cada objeto.</text>
+  <text x="62" y="346" font-size="14" fill="#b26a2c">No hay operación atómica de directorio.</text>
+  <text x="62" y="372" font-size="14" fill="#b26a2c">ACL POSIX no disponible.</text>
+  <text x="62" y="420" font-size="14" fill="#55706a">Sirve para objetos y acceso por URL/SAS.</text>
+  <rect x="700" y="120" width="660" height="360" rx="14" fill="#e2f3e9" stroke="#0b6b5b" stroke-width="2"/>
+  <text x="722" y="154" font-size="18" font-weight="700" fill="#0b6b5b">ADLS Gen2 con HNS</text>
+  <text x="722" y="190" font-size="14" fill="#55706a">Carpetas y archivos reales, con atomicidad.</text>
+  <text x="722" y="226" font-size="15" fill="#173b36">bronze/</text>
+  <text x="744" y="252" font-size="15" fill="#173b36">2026/10/10/orders.csv</text>
+  <text x="744" y="278" font-size="15" fill="#173b36">2026/10/10/products.csv</text>
+  <text x="744" y="304" font-size="15" fill="#173b36">2026/10/11/orders.csv</text>
+  <text x="722" y="346" font-size="14" fill="#0b6b5b">Renombrar “2026” es una operación de directorio.</text>
+  <text x="722" y="372" font-size="14" fill="#0b6b5b">ACL POSIX por carpeta y herencia.</text>
+  <text x="722" y="398" font-size="14" fill="#0b6b5b">Compatible con Blob API y ABFS.</text>
+  <text x="722" y="440" font-size="14" fill="#55706a">Es la base del lakehouse.</text>
+  <rect x="40" y="520" width="1320" height="70" rx="12" fill="#173b36"/>
+  <text x="62" y="550" font-size="16" font-weight="700" fill="#fff">La jerarquía no es cosmética: habilita permisos por carpeta y operaciones eficientes.</text>
+  <text x="62" y="574" font-size="14" fill="#c9e8df">Si solo necesitas objetos, Blob. Si vas a organizar zonas y controlar acceso, ADLS Gen2.</text>
+</svg>
