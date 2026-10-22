@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="1400" height="700" fill="#f7faf9"/>
+  <text x="40" y="45" font-size="26" font-weight="700" fill="#173b36">Tres claves candidatas, tres distribuciones</text>
+  <text x="40" y="72" font-size="16" fill="#55706a">La misma tabla de pedidos; cambia el campo que decide la partición.</text>
+
+  <rect x="40" y="105" width="410" height="470" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+  <rect x="40" y="105" width="410" height="48" rx="14" fill="#0b6b5b"/>
+  <text x="62" y="137" font-size="19" font-weight="700" fill="#fff">/clienteId  ✓</text>
+  <text x="62" y="184" font-size="14" fill="#55706a">Alta cardinalidad y consultas por cliente</text>
+  <rect x="62" y="205" width="365" height="48" rx="8" fill="#d8f0e9"/>
+  <text x="78" y="235" font-size="15" fill="#173b36">c-001 · p-1001, p-1007</text>
+  <rect x="62" y="263" width="365" height="48" rx="8" fill="#d8f0e9"/>
+  <text x="78" y="293" font-size="15" fill="#173b36">c-002 · p-1002</text>
+  <rect x="62" y="321" width="365" height="48" rx="8" fill="#d8f0e9"/>
+  <text x="78" y="351" font-size="15" fill="#173b36">c-003 · p-1003</text>
+  <rect x="62" y="379" width="365" height="48" rx="8" fill="#d8f0e9"/>
+  <text x="78" y="409" font-size="15" fill="#173b36">c-004 · p-1004, p-1008</text>
+  <text x="62" y="468" font-size="14" fill="#0b6b5b">Reparte y sirve para “pedidos de este cliente”.</text>
+  <text x="62" y="496" font-size="14" fill="#55706a">La partición se llena parejo; el reporte diario es fan-out.</text>
+
+  <rect x="490" y="105" width="410" height="470" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+  <rect x="490" y="105" width="410" height="48" rx="14" fill="#b26a2c"/>
+  <text x="512" y="137" font-size="19" font-weight="700" fill="#fff">/status  ✗</text>
+  <text x="512" y="184" font-size="14" fill="#55706a">Solo 3 valores: pagado, pendiente, cancelado</text>
+  <rect x="512" y="205" width="365" height="112" rx="8" fill="#fde7c3" stroke="#b26a2c" stroke-width="2"/>
+  <text x="528" y="235" font-size="15" font-weight="700" fill="#8a4b12">pagado</text>
+  <text x="528" y="260" font-size="14" fill="#8a4b12">9 de 10 pedidos</text>
+  <text x="528" y="292" font-size="14" fill="#8a4b12">→ una partición caliente</text>
+  <rect x="512" y="329" width="365" height="44" rx="8" fill="#fff"/>
+  <text x="528" y="357" font-size="15" fill="#173b36">pendiente · 1</text>
+  <rect x="512" y="383" width="365" height="44" rx="8" fill="#fff"/>
+  <text x="528" y="411" font-size="15" fill="#173b36">cancelado · 1</text>
+  <text x="512" y="468" font-size="14" fill="#b26a2c">Pocas categorías: concentra escrituras.</text>
+  <text x="512" y="496" font-size="14" fill="#55706a">No sirve para “pedidos de este cliente”.</text>
+
+  <rect x="940" y="105" width="410" height="470" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+  <rect x="940" y="105" width="410" height="48" rx="14" fill="#b26a2c"/>
+  <text x="962" y="137" font-size="19" font-weight="700" fill="#fff">/orderDate  ✗</text>
+  <text x="962" y="184" font-size="14" fill="#55706a">Muchos días, pero un día puede explotar</text>
+  <rect x="962" y="205" width="365" height="44" rx="8" fill="#fff"/>
+  <text x="978" y="233" font-size="15" fill="#173b36">2026-10-10 · 2 pedidos</text>
+  <rect x="962" y="259" width="365" height="44" rx="8" fill="#fff"/>
+  <text x="978" y="287" font-size="15" fill="#173b36">2026-10-11 · 1 pedido</text>
+  <rect x="962" y="313" width="365" height="82" rx="8" fill="#fde7c3" stroke="#b26a2c" stroke-width="2"/>
+  <text x="978" y="343" font-size="15" font-weight="700" fill="#8a4b12">Black Friday · 60 %</text>
+  <text x="978" y="370" font-size="14" fill="#8a4b12">→ partición caliente</text>
+  <rect x="962" y="405" width="365" height="44" rx="8" fill="#fff"/>
+  <text x="978" y="433" font-size="15" fill="#173b36">2026-10-13 · 2 pedidos</text>
+  <text x="962" y="468" font-size="14" fill="#b26a2c">Una fecha muy pedida rompe el reparto.</text>
+  <text x="962" y="496" font-size="14" fill="#55706a">El reporte diario sigue siendo fan-out.</text>
+
+  <rect x="40" y="602" width="1310" height="64" rx="12" fill="#173b36"/>
+  <text x="62" y="632" font-size="16" font-weight="700" fill="#fff">Regla: elige la clave por la consulta frecuente y por la distribución, no por el nombre.</text>
+  <text x="62" y="654" font-size="14" fill="#c9e8df">Si la clave tiene 3 valores o un valor concentra el 60 %, no reparte: calienta una partición.</text>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="1400" height="700" fill="#f7faf9"/>
+  <text x="40" y="45" font-size="26" font-weight="700" fill="#173b36">El documento se convierte en un par: (clienteId, id)</text>
+  <text x="40" y="72" font-size="16" fill="#55706a">Cosmos usa clienteId para elegir la partición; el id completa la identidad del documento.</text>
+
+  <rect x="40" y="105" width="410" height="430" rx="14" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+  <text x="62" y="140" font-size="18" font-weight="700" fill="#173b36">Documento JSON</text>
+  <text x="62" y="172" font-size="15" fill="#55706a">contenedor pedidos</text>
+  <text x="62" y="220" font-size="16" fill="#173b36">{</text>
+  <rect x="78" y="238" width="150" height="26" rx="6" fill="#fde7c3"/>
+  <text x="86" y="256" font-size="15" font-weight="700" fill="#8a4b12">"id": "p-1001",</text>
+  <rect x="78" y="278" width="220" height="26" rx="6" fill="#d8f0e9"/>
+  <text x="86" y="296" font-size="15" font-weight="700" fill="#0b6b5b">"clienteId": "c-001",</text>
+  <text x="78" y="330" font-size="15" fill="#3f5b55">"cliente": "Ana Torres",</text>
+  <text x="78" y="360" font-size="15" fill="#3f5b55">"total": 435.06,</text>
+  <text x="78" y="390" font-size="15" fill="#3f5b55">"estado": "pagado"</text>
+  <text x="62" y="420" font-size="16" fill="#173b36">}</text>
+  <text x="62" y="472" font-size="14" fill="#55706a">El id solo es único dentro de la partición.</text>
+  <text x="62" y="496" font-size="14" fill="#55706a">La partición se calcula con el valor de clienteId.</text>
+
+  <path d="M455 300 H520" stroke="#0b6b5b" stroke-width="3"/>
+  <path d="M510 290 L522 300 L510 310" fill="none" stroke="#0b6b5b" stroke-width="3"/>
+
+  <rect x="530" y="218" width="300" height="170" rx="14" fill="#173b36"/>
+  <text x="550" y="250" font-size="15" fill="#9fe3d3">CLAVE LÓGICA</text>
+  <text x="550" y="286" font-size="21" font-weight="700" fill="#fff">(clienteId, id)</text>
+  <text x="550" y="330" font-size="22" font-weight="700" fill="#f7d27a">(c-001, p-1001)</text>
+  <text x="550" y="360" font-size="14" fill="#c9e8df">partition key + id</text>
+
+  <path d="M835 300 H910" stroke="#b26a2c" stroke-width="3"/>
+  <path d="M900 290 L912 300 L900 310" fill="none" stroke="#b26a2c" stroke-width="3"/>
+
+  <text x="940" y="140" font-size="18" font-weight="700" fill="#173b36">Particiones físicas</text>
+  <rect x="940" y="165" width="410" height="86" rx="12" fill="#d8f0e9" stroke="#0b6b5b" stroke-width="2"/>
+  <text x="958" y="194" font-size="17" font-weight="700" fill="#0b6b5b">c-001</text>
+  <text x="958" y="222" font-size="15" fill="#173b36">p-1001 · p-1007</text>
+  <text x="1215" y="222" font-size="14" fill="#0b6b5b">2 documentos</text>
+
+  <rect x="940" y="272" width="410" height="86" rx="12" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+  <text x="958" y="301" font-size="17" font-weight="700" fill="#173b36">c-002</text>
+  <text x="958" y="329" font-size="15" fill="#173b36">p-1002</text>
+  <text x="1215" y="329" font-size="14" fill="#55706a">1 documento</text>
+
+  <rect x="940" y="379" width="410" height="86" rx="12" fill="#fff" stroke="#c9dbd5" stroke-width="2"/>
+  <text x="958" y="408" font-size="17" font-weight="700" fill="#173b36">c-003</text>
+  <text x="958" y="436" font-size="15" fill="#173b36">p-1003</text>
+  <text x="1215" y="436" font-size="14" fill="#55706a">1 documento</text>
+
+  <rect x="40" y="585" width="1310" height="72" rx="12" fill="#fff" stroke="#e2d4b6" stroke-width="2"/>
+  <text x="62" y="616" font-size="16" font-weight="700" fill="#8a4b12">Importante</text>
+  <text x="62" y="642" font-size="15" fill="#3f5b55">Dos documentos pueden compartir el id si están en particiones distintas; la identidad completa es el par. El hash de clienteId decide la partición.</text>
+</svg>

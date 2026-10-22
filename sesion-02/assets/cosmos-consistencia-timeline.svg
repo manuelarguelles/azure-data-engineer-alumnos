@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 760" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="1400" height="760" fill="#f7faf9"/>
+  <text x="40" y="45" font-size="26" font-weight="700" fill="#173b36">Un pago, cinco lecturas: qué ve cada nivel</text>
+  <text x="40" y="72" font-size="16" fill="#55706a">El mismo pedido p-1001 se escribe una vez; cambia lo que cada lector puede ver.</text>
+
+  <rect x="330" y="98" width="820" height="72" rx="12" fill="#173b36"/>
+  <text x="352" y="126" font-size="14" fill="#9fe3d3">ESCRITURA · t = 0</text>
+  <text x="352" y="152" font-size="18" font-weight="700" fill="#fff">p-1001 · S/ 435,06 · estado pagado</text>
+  <text x="1000" y="145" font-size="14" fill="#c9e8df">Ana Torres</text>
+
+  <g font-size="15">
+    <rect x="40" y="205" width="230" height="74" rx="10" fill="#d8f0e9" stroke="#0b6b5b" stroke-width="2"/>
+    <text x="58" y="235" font-size="17" font-weight="700" fill="#0b6b5b">Fuerte</text>
+    <text x="58" y="258" font-size="13" fill="#173b36">espera confirmación</text>
+    <rect x="300" y="205" width="1050" height="74" rx="10" fill="#fff" stroke="#c9dbd5"/>
+    <text x="322" y="235" font-size="15" font-weight="700" fill="#0b6b5b">t = 1 · ve S/ 435,06 / pagado</text>
+    <text x="322" y="258" font-size="13" fill="#55706a">La lectura ve la última escritura confirmada. Más latencia.</text>
+
+    <rect x="40" y="295" width="230" height="74" rx="10" fill="#fde7c3" stroke="#b26a2c" stroke-width="2"/>
+    <text x="58" y="325" font-size="17" font-weight="700" fill="#8a4b12">Obsolescencia limitada</text>
+    <text x="58" y="348" font-size="13" fill="#8a4b12">atraso máximo 5 s</text>
+    <rect x="300" y="295" width="1050" height="74" rx="10" fill="#fff" stroke="#c9dbd5"/>
+    <text x="322" y="325" font-size="15" font-weight="700" fill="#8a4b12">t = 1 · puede ver pendiente; t = 5 · ve 435,06</text>
+    <text x="322" y="348" font-size="13" fill="#55706a">Nunca se atrasa más de k versiones o t segundos.</text>
+
+    <rect x="40" y="385" width="230" height="74" rx="10" fill="#d8f0e9" stroke="#0b6b5b" stroke-width="2"/>
+    <text x="58" y="415" font-size="17" font-weight="700" fill="#0b6b5b">Sesión</text>
+    <text x="58" y="438" font-size="13" fill="#173b36">cada usuario ve lo suyo</text>
+    <rect x="300" y="385" width="1050" height="74" rx="10" fill="#fff" stroke="#c9dbd5"/>
+    <text x="322" y="415" font-size="15" font-weight="700" fill="#0b6b5b">Ana ve 435,06; otro usuario puede ver pendiente</text>
+    <text x="322" y="438" font-size="13" fill="#55706a">Es el default para una app con usuario y carrito.</text>
+
+    <rect x="40" y="475" width="230" height="74" rx="10" fill="#fde7c3" stroke="#b26a2c" stroke-width="2"/>
+    <text x="58" y="505" font-size="17" font-weight="700" fill="#8a4b12">Prefijo consistente</text>
+    <text x="58" y="528" font-size="13" fill="#8a4b12">orden, con atraso</text>
+    <rect x="300" y="475" width="1050" height="74" rx="10" fill="#fff" stroke="#c9dbd5"/>
+    <text x="322" y="505" font-size="15" font-weight="700" fill="#8a4b12">Ve el pedido antes que el pago; puede ir atrasado</text>
+    <text x="322" y="528" font-size="13" fill="#55706a">Nunca ve el pago antes que el pedido.</text>
+
+    <rect x="40" y="565" width="230" height="74" rx="10" fill="#f7d4cf" stroke="#b3261e" stroke-width="2"/>
+    <text x="58" y="595" font-size="17" font-weight="700" fill="#b3261e">Eventual</text>
+    <text x="58" y="618" font-size="13" fill="#b3261e">sin orden ni frescura</text>
+    <rect x="300" y="565" width="1050" height="74" rx="10" fill="#fff" stroke="#c9dbd5"/>
+    <text x="322" y="595" font-size="15" font-weight="700" fill="#b3261e">Puede ver pendiente; luego converge</text>
+    <text x="322" y="618" font-size="13" fill="#55706a">Sirve para contadores, likes o telemetría agregada.</text>
+  </g>
+
+  <rect x="40" y="675" width="1310" height="56" rx="12" fill="#173b36"/>
+  <text x="62" y="700" font-size="16" font-weight="700" fill="#fff">El nivel se elige por pantalla: pagos, carrito o contador de likes.</text>
+  <text x="62" y="721" font-size="14" fill="#c9e8df">Bajar de nivel no es “hacerlo mal”: compras latencia y disponibilidad a cambio de tolerar atraso.</text>
+</svg>
