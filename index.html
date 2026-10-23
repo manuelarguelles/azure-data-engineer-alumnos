@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P.E. Data Engineer · Azure — material del curso</title>
+<style>
+  :root{--paper:#f7faf9;--ink:#173b36;--muted:#55706a;--accent:#1f7a6b;--line:#d8e4e0;--card:#fff}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+  header{padding:48px 6vw 24px;border-bottom:1px solid var(--line)}
+  h1{margin:0 0 8px;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-.02em}
+  header p{margin:0;color:var(--muted);max-width:70ch}
+  main{padding:32px 6vw 64px;display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:8px}
+  article h2{margin:0;font-size:1.15rem}
+  article p{margin:0;color:var(--muted);font-size:.95rem}
+  .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  a.btn{display:inline-block;padding:8px 12px;border-radius:9px;background:var(--accent);color:#fff;text-decoration:none;font-size:.9rem;font-weight:600}
+  a.alt{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+  a.btn:hover{filter:brightness(1.08)}
+  footer{padding:0 6vw 48px;color:var(--muted);font-size:.85rem}
+  code{background:#eef4f2;padding:1px 5px;border-radius:5px}
+</style>
+</head>
+<body>
+<header>
+  <h1>P.E. Data Engineer · Azure</h1>
+  <p>Material del módulo Azure (Cloud Computing, DSRP). Abrí cualquier sesión desde acá. Los decks funcionan sin internet; solo los enlaces a Microsoft Learn necesitan conexión.</p>
+</header>
+<main>
+  <article>
+    <h2>Sesión 1 · Introducción a la nube</h2>
+    <p>Nube, IaaS/PaaS/SaaS, regiones y grupo de recursos.</p>
+    <div class="links">
+      <a class="btn" href="sesion-01/S01-deck.html">Deck</a>
+      <a class="btn alt" href="sesion-01/lab/CONSIGNA.md">Laboratorio</a>
+      <a class="btn alt" href="sesion-01/guias/01-guia-portal-azure-windows.md">Guía</a>
+    </div>
+  </article>
+  <article>
+    <h2>Sesión 2 · Datos en Azure y Azure SQL</h2>
+    <p>Tipos de dato, Azure SQL, Cosmos DB y conexión desde SSMS/DBeaver.</p>
+    <div class="links">
+      <a class="btn" href="sesion-02/S02-deck.html">Deck</a>
+      <a class="btn alt" href="sesion-02/lab/CONSIGNA.md">Laboratorio</a>
+    </div>
+  </article>
+  <article>
+    <h2>Sesión 3 · Big Data, lago y lakehouse</h2>
+    <p>5 V, ciclo de vida, formatos y arquitectura medallón.</p>
+    <div class="links">
+      <a class="btn" href="sesion-03/S03-deck.html">Deck</a>
+      <a class="btn alt" href="sesion-03/lab/CONSIGNA.md">Laboratorio</a>
+    </div>
+  </article>
+  <article>
+    <h2>Sesión 4 · Data lake y ADLS Gen2</h2>
+    <p>Jerarquía real, zonas, RBAC/ACL y ciclo de vida.</p>
+    <div class="links">
+      <a class="btn" href="sesion-04/S04-deck.html">Deck</a>
+      <a class="btn alt" href="sesion-04/lab/CONSIGNA.md">Laboratorio</a>
+    </div>
+  </article>
+  <article>
+    <h2>Sesión 5 · Secretos, cómputo y Databricks</h2>
+    <p>Workspace, Unity Catalog, Key Vault y carga bronce en Delta.</p>
+    <div class="links">
+      <a class="btn" href="sesion-05/S05-deck.html">Deck</a>
+      <a class="btn alt" href="sesion-05/lab/CONSIGNA.md">Laboratorio</a>
+      <a class="btn alt" href="sesion-05/guias/01-guia-databricks-uc-paso-a-paso.md">Guía</a>
+    </div>
+  </article>
+  <article>
+    <h2>Sesión 6 · Bronce a plata y Databricks SQL</h2>
+    <p>Grano, joins, calidad, consultas, job y linaje.</p>
+    <div class="links">
+      <a class="btn" href="sesion-06/S06-deck.html">Deck</a>
+      <a class="btn alt" href="sesion-06/lab/CONSIGNA.md">Laboratorio</a>
+      <a class="btn alt" href="sesion-06/guias/01-guia-bronce-a-plata-y-job.md">Guía</a>
+    </div>
+  </article>
+</main>
+<footer>
+  <p>Para ver los decks en local, cloná el repo y abrí <code>index.html</code>. GitHub muestra el HTML como código, no lo renderiza.</p>
+</footer>
+</body>
+</html>

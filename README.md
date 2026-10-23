@@ -6,7 +6,7 @@ Módulo Azure del curso **Cloud Computing** del P.E. Data Engineer Multicloud (D
 GitHub muestra los archivos `.html` como código. Para verlos funcionando:
 
 1. Pulsa **Code → Download ZIP** (o clona el repositorio) y descomprime **toda** la carpeta: el deck necesita las carpetas `assets/`, `capturas/`, `herramientas/` y `guias/` junto a él.
-2. Haz doble clic en el archivo `.html` que quieras abrir. Funciona sin conexión, salvo los enlaces a páginas de Microsoft y otras fuentes.
+2. Abre **`index.html`** en la raíz y entra a cualquier sesión desde ahí. También puedes abrir directamente `sesion-05/S05-deck.html`. Funciona sin conexión, salvo los enlaces a páginas de Microsoft y otras fuentes.
 
 ## Sesión 1 · Introducción a la nube
 
