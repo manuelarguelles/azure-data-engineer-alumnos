@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 620" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="1400" height="620" fill="#f7faf9"/>
+  <text x="40" y="45" font-size="26" font-weight="700" fill="#173b36">El motor no es el permiso</text>
+  <text x="40" y="72" font-size="16" fill="#55706a">Elegir cómputo no cambia quién puede leer el dato.</text>
+
+  <rect x="40" y="110" width="620" height="380" rx="14" fill="#e7eef7" stroke="#3d6fa8" stroke-width="2"/>
+  <text x="62" y="146" font-size="18" font-weight="700" fill="#244f7a">Plano de cómputo</text>
+  <text x="62" y="176" font-size="14" fill="#55706a">¿Dónde corre Spark y quién paga las máquinas?</text>
+  <rect x="62" y="200" width="576" height="58" rx="10" fill="#fff" stroke="#3d6fa8"/>
+  <text x="78" y="224" font-size="15" font-weight="700" fill="#173b36">Clúster clásico</text>
+  <text x="78" y="246" font-size="13" fill="#55706a">VMs en tu suscripción · tú eliges tamaño, runtime y auto-stop · consume cuota de vCPU</text>
+  <rect x="62" y="272" width="576" height="58" rx="10" fill="#fff" stroke="#3d6fa8"/>
+  <text x="78" y="296" font-size="15" font-weight="700" fill="#173b36">Job cluster</text>
+  <text x="78" y="318" font-size="13" fill="#55706a">Nace con el job y muere al terminar · ideal para pipelines programados</text>
+  <rect x="62" y="344" width="576" height="58" rx="10" fill="#fff" stroke="#3d6fa8"/>
+  <text x="78" y="368" font-size="15" font-weight="700" fill="#173b36">Serverless</text>
+  <text x="78" y="390" font-size="13" fill="#55706a">Databricks administra el cómputo · sin cuota de VM · se paga por uso</text>
+  <text x="62" y="444" font-size="14" fill="#3d6fa8">El notebook corre en el cómputo que elijas: clásico, job o serverless.</text>
+  <text x="62" y="468" font-size="14" fill="#3d6fa8">Si la suscripción no tiene cuota, serverless sigue disponible.</text>
+
+  <rect x="700" y="110" width="660" height="380" rx="14" fill="#f6e3cf" stroke="#b26a2c" stroke-width="2"/>
+  <text x="722" y="146" font-size="18" font-weight="700" fill="#8a4b12">Plano de datos</text>
+  <text x="722" y="176" font-size="14" fill="#55706a">¿Quién puede leer o escribir cada ruta?</text>
+  <rect x="722" y="200" width="616" height="58" rx="10" fill="#fff" stroke="#b26a2c"/>
+  <text x="738" y="224" font-size="15" font-weight="700" fill="#173b36">Access connector (identidad administrada)</text>
+  <text x="738" y="246" font-size="13" fill="#55706a">Sin claves: Azure le da un token a la identidad del conector</text>
+  <rect x="722" y="272" width="616" height="58" rx="10" fill="#fff" stroke="#b26a2c"/>
+  <text x="738" y="296" font-size="15" font-weight="700" fill="#173b36">Storage credential y external location</text>
+  <text x="738" y="318" font-size="13" fill="#55706a">Unity Catalog dice qué credencial puede tocar qué ruta del lago</text>
+  <rect x="722" y="344" width="616" height="58" rx="10" fill="#fff" stroke="#b26a2c"/>
+  <text x="738" y="368" font-size="15" font-weight="700" fill="#173b36">Catálogo, schemas y tablas</text>
+  <text x="738" y="390" font-size="13" fill="#55706a">pede.bronze.orders es una tabla externa que apunta a Delta en el lago</text>
+  <text x="722" y="444" font-size="14" fill="#8a4b12">Key Vault guarda secretos de aplicación, no permisos de datos.</text>
+  <text x="722" y="468" font-size="14" fill="#8a4b12">El acceso al lago se resuelve con identidad, no con una clave.</text>
+
+  <rect x="40" y="520" width="1320" height="70" rx="12" fill="#173b36"/>
+  <text x="62" y="550" font-size="16" font-weight="700" fill="#fff">Regla: separa el cómputo del acceso al dato.</text>
+  <text x="62" y="574" font-size="14" fill="#c9e8df">Cambiar de clúster no debe cambiar quién puede leer el lago; rotar un secreto no debe romper una tabla.</text>
+</svg>

@@ -53,3 +53,14 @@ GitHub muestra los archivos `.html` como código. Para verlos funcionando:
 | [Plantilla de evidencia](sesion-04/lab/plantilla-evidencia.md) | Formato de `evidencia-s04.md`. |
 
 No subas aquí datos personales, claves ni tokens.
+
+## Sesión 5 · ADLS aplicado, secretos y Databricks
+
+| Recurso | Qué es |
+|---|---|
+| [Deck de la sesión](sesion-05/S05-deck.html) | 34 slides: workspace y cómputo, Unity Catalog, Key Vault y tablas Delta. |
+| [Consigna del laboratorio](sesion-05/lab/CONSIGNA.md) | Leer el bronce y crear las cinco tablas Delta, 40 min. |
+| [Plantilla de evidencia](sesion-05/lab/plantilla-evidencia.md) | Formato de `evidencia-s05.md`. |
+| [Guía visual paso a paso](sesion-05/guias/01-guia-databricks-uc-paso-a-paso.md) | Conexión del lago con Unity Catalog y capturas reales. |
+
+**Idea central:** el lago ya tiene los datos; S05 le da cómputo y gobierno. El laboratorio funciona con el SQL warehouse, sin crear un clúster.
