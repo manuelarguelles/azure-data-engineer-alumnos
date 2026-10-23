@@ -64,3 +64,15 @@ No subas aquí datos personales, claves ni tokens.
 | [Guía visual paso a paso](sesion-05/guias/01-guia-databricks-uc-paso-a-paso.md) | Conexión del lago con Unity Catalog y capturas reales. |
 
 **Idea central:** el lago ya tiene los datos; S05 le da cómputo y gobierno. El laboratorio funciona con el SQL warehouse, sin crear un clúster.
+
+## Sesión 6 · Consolidación bronce → plata y Databricks SQL
+
+| Recurso | Qué es |
+|---|---|
+| [Deck de la sesión](sesion-06/S06-deck.html) | 31 slides: grano, joins, calidad, Databricks SQL, jobs y linaje. |
+| [Consigna del laboratorio](sesion-06/lab/CONSIGNA.md) | Construir la tabla plata y programar el job, 40 min. |
+| [Plantilla de evidencia](sesion-06/lab/plantilla-evidencia.md) | Formato de `evidencia-s06.md`. |
+| [Script SQL](sesion-06/lab/02_silver.sql) | La consolidación completa. |
+| [Guía visual](sesion-06/guias/01-guia-bronce-a-plata-y-job.md) | Paso a paso del job y las validaciones. |
+
+**Idea central:** la plata une el bronce con un grano explícito; el job lo convierte en proceso observable.
