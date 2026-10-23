@@ -3,7 +3,7 @@
 **Duración:** 40 min · **Modalidad:** individual · **Entregable:** `evidencia-s05.md`
 **Requisito:** el storage de S04 con los cinco CSV en `bronze/pedidos/fecha_carga=2026-10-10/` y un workspace de Databricks con Unity Catalog.
 
-**Plan B sin cómputo clásico:** todo el laboratorio se puede completar con el **SQL warehouse** del workspace. No necesitas crear un clúster. Si tampoco tienes workspace propio, usa el workspace demo del instructor en modo lectura y completa la evidencia con las consultas.
+**Plan B:** si tu workspace no aprovisiona cómputo, usa el **SQL warehouse** y completa la misma evidencia. El workspace del instructor en East US tiene serverless y el catálogo `pede` ya cargado para la demo en vivo.
 
 ## Qué vas a demostrar
 
@@ -123,4 +123,4 @@ Incluye:
 | `PATH_NOT_FOUND` | La external location no cubre la ruta | Revisar la URL de `ext_pede_bronze` |
 | `SECRET_NOT_FOUND` | Scope o key mal escritos | Listar scopes y secretos, sin imprimir valores |
 | La tabla no aparece | Se escribió el archivo pero no se registró | Crear la tabla con `LOCATION` |
-| El clúster queda en Pending | El workspace no aprovisiona el clúster | Usar el SQL warehouse |
+| El clúster queda en Pending | El workspace no aprovisiona cómputo | Usar serverless (East US) o el SQL warehouse |

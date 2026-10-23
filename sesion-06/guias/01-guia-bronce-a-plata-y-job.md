@@ -1,14 +1,14 @@
 # Guía visual · Consolidar bronce a plata y programar el job
 
 > Caso real: `pede.bronze` (S05) → `pede.silver.pedidos_detalle` → `job-pede-s06-plata`.
-> Capturas del workspace `dbw-pede-demo-brs-001`.
+> Capturas del workspace del instructor en East US; los datos viven en el lake de Brazil South.
 
 ## Antes de empezar
 
 | Pieza | Dónde | Estado |
 |---|---|---|
 | Cinco tablas bronce | `pede.bronze` | Creadas en S05 |
-| SQL warehouse | Compute → SQL warehouses | `Serverless Starter Warehouse` |
+| SQL warehouse | Compute → SQL warehouses | `Serverless Starter Warehouse` (East US) |
 | Archivo SQL | Workspace → `pede/S06/02_silver` | `material/s06/lab/02_silver.sql` |
 
 ---
@@ -47,9 +47,9 @@ LEFT JOIN pede.bronze.payments pay ON ...;
 
 **Verificación:** `SELECT COUNT(*)` devuelve 15.
 
-![Tabla plata en el catálogo](../capturas/27-silver-table.png)
+![Tabla plata en el catálogo](../capturas/30-silver-eus.png)
 
-![Vista previa de la tabla plata](../capturas/28-silver-sample-data.png)
+![Vista previa de la tabla plata](../capturas/34-silver-sample-eus.png)
 
 ---
 
@@ -91,11 +91,11 @@ SELECT
 
 **Run now** para validar la ejecución.
 
-![Run del job en Succeeded](../capturas/25-job-run-succeeded.png)
+![Run del job en Succeeded](../capturas/31-job-s06-success.png)
 
 **Verificación:** estado `Succeeded`, duración de segundos, SQL visible en el run.
 
-![Definición del job](../capturas/24-job-pede-s06.png)
+![Definición del job](../capturas/35-job-def-eus.png)
 
 > Un schedule pausado se puede activar después de aprobar la tabla. Activar antes es automatizar un error.
 
@@ -105,7 +105,7 @@ SELECT
 
 **SQL → Query History.**
 
-![Historial de consultas](../capturas/26-query-history.png)
+![Historial de consultas](../capturas/32-query-history-eus.png)
 
 Ahí aparecen las consultas del editor, de la API y del job. Es la primera herramienta cuando un número cambia.
 
@@ -115,7 +115,7 @@ Ahí aparecen las consultas del editor, de la API y del job. Es la primera herra
 
 **Catalog → pede → silver → pedidos_detalle → Lineage.**
 
-![Linaje de la tabla plata](../capturas/29-silver-lineage.png)
+![Linaje de la tabla plata](../capturas/33-lineage-eus.png)
 
 **Verificación:** las cinco tablas bronce y `job-pede-s06-plata` aparecen como upstream.
 

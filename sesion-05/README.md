@@ -11,4 +11,4 @@
 
 **Estado:** v1 lista para revisión humana. Gate estructural PASS (34 slides, 12 fuentes). Audit visual PASS.
 
-**Nota de cómputo:** el workspace de la demo no logró aprovisionar clústeres (quedan en `Pending` sin crear la VMSS, aunque la suscripción sí puede crear VMs). El laboratorio usa el SQL warehouse serverless; el notebook PySpark queda como alternativa para cuentas con clúster.
+**Nota de cómputo:** el workspace de Brazil South no aprovisiona cómputo (clústeres en `Pending` y serverless con error). El laboratorio corre en el workspace del instructor en **East US**, donde serverless sí funciona, con el lake en Brazil South. Plan B: SQL warehouse.

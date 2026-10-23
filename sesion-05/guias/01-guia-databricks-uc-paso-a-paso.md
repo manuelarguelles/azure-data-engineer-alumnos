@@ -1,6 +1,6 @@
 # Guía visual · Conectar Databricks al lago con Unity Catalog
 
-> Caso real del curso: cuenta `stpededemobrs001`, workspace `dbw-pede-demo-brs-001`, catálogo `pede`.
+> Caso real del curso: lake `stpededemobrs001` (Brazil South), workspace del instructor en East US (`adb-7405604738459296.16`), catálogo `pede`. El cómputo está en East US porque en Brazil South no aprovisiona.
 > Todas las capturas son del portal y del workspace reales.
 
 ## Antes de empezar
@@ -9,7 +9,7 @@
 |---|---|---|
 | Resource group | `rg-pede-demo-dev-brs-001` | Brazil South |
 | Storage | `stpededemobrs001` | Brazil South |
-| Workspace | `dbw-pede-demo-brs-001` | Premium, UC habilitado |
+| Workspace | `dbw-pfchurn-dev-eus-001` (instructor) | Premium, UC, East US |
 | Access connector | `ac-pede-demo-brs-001` | Mismo RG |
 | Key Vault | `kv-pede-demo-brs-001` | Access policy |
 
@@ -24,13 +24,13 @@
 | Campo | Valor |
 |---|---|
 | Resource group | `rg-pede-demo-dev-brs-001` |
-| Workspace name | `dbw-pede-demo-brs-001` |
-| Region | Brazil South |
+| Workspace name | `dbw-pfchurn-dev-eus-001` (o uno propio en East US) |
+| Region | **East US** (serverless disponible) |
 | Pricing tier | **Premium** (requisito de Unity Catalog) |
 
 Al terminar, **Overview** debe mostrar `Status: Active` y la URL del workspace.
 
-![Overview del workspace](../capturas/02-workspace-overview.png)
+![Overview del workspace en East US](../capturas/39-workspace-portal-eus.png)
 
 > **Costo:** el workspace no consume VM. El gasto aparece cuando se enciende cómputo.
 
@@ -144,7 +144,7 @@ CREATE SCHEMA IF NOT EXISTS pede.silver;
 CREATE SCHEMA IF NOT EXISTS pede.gold;
 ```
 
-![Catálogo pede con sus schemas](../capturas/17-catalogo-pede.png)
+![Catálogo pede en el workspace East US](../capturas/31-catalogo-bronze-eus.png)
 
 **Verificación:** `pede.bronze` existe y es visible en el explorador de catálogo.
 
@@ -244,9 +244,26 @@ FROM read_files(
 
 ---
 
+## Paso 9 · Ejecutar el notebook serverless
+
+Abre el notebook `lab/notebooks/01_load_bronze_andina.py` en el workspace de East US y elige **Serverless** en el selector de cómputo. **Run all**.
+
+El notebook:
+1. lista los cinco CSV de bronce,
+2. lee el secreto y muestra `[REDACTED]`,
+3. escribe las cinco tablas Delta,
+4. valida los conteos 5/8/10/15/9,
+5. deja el historial de versiones.
+
+![Notebook serverless con los conteos validados](../capturas/38-notebook-counts-eus.png)
+
+**Verificación:** la celda de conteos muestra 5, 15, 10, 9 y 8; la celda del secreto muestra `[REDACTED]` y longitud 21.
+
+> En serverless no existe `REFRESH TABLE`; el notebook ya no lo usa. Si ves `NOT_SUPPORTED_WITH_SERVERLESS`, estás corriendo una versión vieja.
+
 ## Por qué el laboratorio no usa un clúster
 
-En el workspace de la demo, Databricks no aprovisiona el clúster: queda en `Pending` (`Finding instances`) y no se crea la VMSS, aunque la suscripción sí puede crear VMs. Se probó en Brazil South y East US, single y multi-node, con varios tamaños. Por eso el laboratorio usa el **SQL warehouse serverless**, que ejecuta la misma lógica.
+En Brazil South el workspace no aprovisiona cómputo: clústeres en `Pending` y serverless con error. En **East US** el serverless sí funciona (probado con un notebook interactivo y con el job del curso). Por eso el laboratorio corre en el workspace del instructor en East US; el lake sigue en Brazil South.
 
 Si tu cuenta sí tiene cuota, el notebook `lab/notebooks/01_load_bronze_andina.py` hace exactamente lo mismo con PySpark en un clúster.
 
@@ -258,4 +275,4 @@ Si tu cuenta sí tiene cuota, el notebook `lab/notebooks/01_load_bronze_andina.p
 | `ValidateCredential Missing one of...` | La credencial no se seleccionó en el formulario | Volver a elegirla y crear sin cerrar el desplegable |
 | Scope AKV no se crea | El vault está en RBAC | Cambiar a Vault access policy |
 | `Sin acceso` en el portal | Token de un directorio distinto | Cambiar de directorio o recargar sesión |
-| Clúster en `Pending` | El workspace no aprovisiona el clúster | Usar serverless / SQL warehouse |
+| Clúster en `Pending` | El workspace de Brazil South no aprovisiona | Usar el workspace East US con serverless |

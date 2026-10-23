@@ -108,7 +108,6 @@ for table in TABLES:
         USING DELTA
         LOCATION '{target}'
     """)
-    spark.sql(f"REFRESH TABLE pede.bronze.{table}")
     print(f"OK pede.bronze.{table} -> {target}")
 
 # COMMAND ----------

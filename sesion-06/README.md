@@ -11,4 +11,4 @@
 
 **Estado:** v1 lista para revisión humana. Gate estructural PASS (31 slides, 10 fuentes). Audit visual PASS.
 
-**Nota de cómputo:** job SQL sobre el SQL warehouse serverless; el workspace de la demo no aprovisiona clústeres.
+**Nota de cómputo:** job SQL sobre el SQL warehouse serverless en el workspace del instructor (East US); el lake vive en Brazil South.
