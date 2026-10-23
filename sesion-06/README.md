@@ -1,13 +1,14 @@
-# Sesión 6 · Consolidación bronce → plata y Databricks SQL
+# Módulo 4 · Consolidación bronce → plata y Databricks SQL — material de la sesión 6
 
-| Recurso | Qué es |
-|---|---|
-| [Deck de la sesión](S06-deck.html) | 31 slides: grano, joins, calidad, Databricks SQL, job y linaje. |
-| [Consigna del laboratorio](lab/CONSIGNA.md) | Construir la tabla plata y programar el job, 40 min. |
-| [Plantilla de evidencia](lab/plantilla-evidencia.md) | Formato de `evidencia-s06.md`. |
-| [Script SQL](lab/02_silver.sql) | La consolidación completa, lista para ejecutar. |
-| [Guía visual](guias/01-guia-bronce-a-plata-y-job.md) | Paso a paso del job y las validaciones. |
+- `slides/` — `contenido.py`, `S06-deck-v1.html` (31 slides), `deck.css`, `deck.js`, builders.
+- `lab/` — `CONSIGNA.md`, `plantilla-evidencia.md` y `02_silver.sql`.
+- `guias/` — guía visual del job y las consultas.
+- `instructor/` — notas privadas y clave del laboratorio.
+- `capturas/` — capturas reales del workspace y del job.
+- `qa/` — audit en 4 viewports × 3 temas.
 
-**Idea central:** la plata une el bronce con un grano explícito y lo valida; el job convierte la consulta en un proceso observable.
+**Idea central:** el bronce está normalizado; la plata lo une con un grano explícito, lo valida y lo deja consultable. El job convierte la consulta en un proceso observable.
 
-No subas contraseñas, tokens ni datos personales.
+**Estado:** v1 lista para revisión humana. Gate estructural PASS (31 slides, 10 fuentes). Audit visual PASS.
+
+**Nota de cómputo:** job SQL sobre el SQL warehouse serverless; el workspace de la demo no aprovisiona clústeres.

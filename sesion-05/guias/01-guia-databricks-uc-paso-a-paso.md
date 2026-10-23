@@ -246,7 +246,7 @@ FROM read_files(
 
 ## Por qué el laboratorio no usa un clúster
 
-La suscripción de la demo tiene `Dedicated vCPUs = 0` en todas las regiones. Un clúster clásico queda en `Pending` y no arranca por más que el workspace esté activo. El **SQL warehouse serverless** no consume esa cuota y ejecuta la misma lógica.
+En el workspace de la demo, Databricks no aprovisiona el clúster: queda en `Pending` (`Finding instances`) y no se crea la VMSS, aunque la suscripción sí puede crear VMs. Se probó en Brazil South y East US, single y multi-node, con varios tamaños. Por eso el laboratorio usa el **SQL warehouse serverless**, que ejecuta la misma lógica.
 
 Si tu cuenta sí tiene cuota, el notebook `lab/notebooks/01_load_bronze_andina.py` hace exactamente lo mismo con PySpark en un clúster.
 
@@ -258,4 +258,4 @@ Si tu cuenta sí tiene cuota, el notebook `lab/notebooks/01_load_bronze_andina.p
 | `ValidateCredential Missing one of...` | La credencial no se seleccionó en el formulario | Volver a elegirla y crear sin cerrar el desplegable |
 | Scope AKV no se crea | El vault está en RBAC | Cambiar a Vault access policy |
 | `Sin acceso` en el portal | Token de un directorio distinto | Cambiar de directorio o recargar sesión |
-| Clúster en `Pending` | Cuota de vCPU en 0 | Usar serverless / SQL warehouse |
+| Clúster en `Pending` | El workspace no aprovisiona el clúster | Usar serverless / SQL warehouse |

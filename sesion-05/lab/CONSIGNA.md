@@ -123,4 +123,4 @@ Incluye:
 | `PATH_NOT_FOUND` | La external location no cubre la ruta | Revisar la URL de `ext_pede_bronze` |
 | `SECRET_NOT_FOUND` | Scope o key mal escritos | Listar scopes y secretos, sin imprimir valores |
 | La tabla no aparece | Se escribió el archivo pero no se registró | Crear la tabla con `LOCATION` |
-| El clúster queda en Pending | La suscripción no tiene cuota de vCPU | Usar el SQL warehouse |
+| El clúster queda en Pending | El workspace no aprovisiona el clúster | Usar el SQL warehouse |
