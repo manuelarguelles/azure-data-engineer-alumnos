@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diseñador de lakehouse · S03</title>
+<style>
+:root{--bg:#f4f6fa;--panel:#fff;--ink:#1b2430;--mut:#5b6678;--line:#d5dbe6;--acc:#0b6bcb;--ok:#18794e;--bad:#b42318}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111723;--panel:#1a2232;--ink:#e8edf6;--mut:#9aa7bd;--line:#2c3850;--acc:#5aa9ff;--ok:#4cc38a;--bad:#ff7b72}}
+:root[data-theme="dark"]{--bg:#111723;--panel:#1a2232;--ink:#e8edf6;--mut:#9aa7bd;--line:#2c3850;--acc:#5aa9ff;--ok:#4cc38a;--bad:#ff7b72}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel)}
+header h1{font-size:16px;margin:0}
+header .sp{flex:1}
+button,select,input[type=text]{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+button{cursor:pointer}button.pri{background:var(--acc);border-color:var(--acc);color:#fff}
+main{display:grid;grid-template-columns:200px minmax(0,1fr) 250px;gap:12px;padding:12px 16px;max-width:100vw}
+main>div{min-width:0}
+aside{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px;align-self:start;max-height:calc(100vh - 90px);overflow:auto}
+aside h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:10px 0 6px}
+aside h2:first-child{margin-top:0}
+.chip{display:block;margin:0 0 6px;padding:7px 9px;border-radius:6px;border:1px solid;font-size:13px;cursor:grab;user-select:none;touch-action:none}
+.hint{color:var(--mut);font-size:12px}
+#wrap{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+svg{display:block;width:100%;height:auto;touch-action:none}
+.node{cursor:move}.node text{pointer-events:none}
+.handle{cursor:crosshair}
+#ghost{position:fixed;pointer-events:none;z-index:10;display:none;opacity:.85}
+label{display:block;margin:8px 0 3px;color:var(--mut);font-size:12px}
+#panel input[type=text],#panel select{width:100%}
+#checks{list-style:none;padding:0;margin:0;font-size:13px}
+#checks li{padding:3px 0}#checks .ok{color:var(--ok)}#checks .no{color:var(--bad)}
+dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);padding:18px;max-width:380px}
+dialog::backdrop{background:#0008}
+dialog input{width:100%;margin-bottom:8px}
+.err{color:var(--bad);font-size:12px;min-height:16px}
+@media (max-width:1150px){main{grid-template-columns:190px minmax(0,1fr)}main>aside:last-child{grid-column:1/-1;max-height:none}}
+@media (max-width:760px){main{grid-template-columns:minmax(0,1fr)}aside{max-height:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Diseñador de lakehouse · Andina · S03</h1>
+  <span class="hint">Arrastra un nodo al lienzo · arrastra el punto azul de un nodo hacia otro para conectar · clic para editar</span>
+  <span class="sp"></span>
+  <button id="bClear">Vaciar</button>
+  <button id="bSvg">Descargar imagen (SVG)</button>
+  <button id="bJson" class="pri">Exportar entrega (.json)</button>
+</header>
+<main>
+  <aside id="palette"></aside>
+  <div>
+    <div id="wrap"><svg id="cv" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" aria-label="Lienzo de arquitectura"></svg></div>
+    <p class="hint">Cada zona responde una pregunta distinta. Debajo de la línea punteada va el gobierno: identidad, catálogo, linaje y costo.</p>
+  </div>
+  <aside>
+    <h2>Seleccionado</h2>
+    <div id="panel"><p class="hint">Haz clic en un nodo o en una flecha.</p></div>
+    <h2>Autocomprobación</h2>
+    <ul id="checks"></ul>
+  </aside>
+</main>
+<div id="ghost"></div>
+
+<dialog id="dlg">
+  <form method="dialog" id="frm">
+    <h3 style="margin-top:0">Antes de exportar</h3>
+    <p class="hint">Tu nombre y apellido quedan dentro del archivo.</p>
+    <label for="inN">Nombre</label><input id="inN" type="text" autocomplete="given-name">
+    <label for="inA">Apellido</label><input id="inA" type="text" autocomplete="family-name">
+    <div class="err" id="err"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button type="button" id="dCancel">Cancelar</button>
+      <button type="submit" class="pri">Continuar y descargar</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const ZONAS = [
+  {id:"Fuentes", x:0,   q:"¿De dónde viene?"},
+  {id:"Bronce",  x:240, q:"¿Qué llegó, tal cual?"},
+  {id:"Plata",   x:480, q:"¿Qué es confiable?"},
+  {id:"Oro",     x:720, q:"¿Qué responde al negocio?"},
+  {id:"Consumo", x:960, q:"¿Quién lo usa?"},
+];
+const ZW = 240, HEAD = 44, GOB_Y = 560, W = 1200, H = 700, NW = 160, NH = 46;
+const COL = {fuente:["#e8f1ff","#7aa7e0"], almac:["#fdf1dc","#d9a441"], proc:["#e9f7ee","#5fb582"], gob:["#f3e8fb","#a77bd0"], cons:["#fde8ec","#e08a9b"], nota:["#f1f1f1","#aaa"]};
+const CATALOGO = [
+  ["Fuentes de Andina","fuente",[["SQL pedidos y pagos"],["CSV productos/clientes/ventas"],["JSON clics y navegación"],["PDF facturas y contratos"],["Logs de aplicación"],["Puntajes de modelos"],["API externa (tipo de cambio)"],["Maestro de tiendas"]]],
+  ["Almacenamiento","almac",[["Carpeta ADLS Gen2"],["Tabla Delta"],["Carpeta Parquet"]]],
+  ["Procesamiento","proc",[["Ingesta (batch)"],["Ingesta (streaming)"],["Job Databricks / Spark"],["Limpieza y calidad"],["Databricks SQL"]]],
+  ["Consumo","cons",[["Power BI / reporte"],["Modelo de ML"],["API / aplicación"]]],
+  ["Gobierno","gob",[["Entra ID + RBAC/ACL"],["Catálogo (Unity Catalog)"],["Linaje"],["Key Vault"],["Control de costo"],["Enmascarar PII"]]],
+  ["Otro","nota",[["Nota libre"]]],
+];
+const FORMATOS = ["", "CSV","JSON","Parquet","Delta","PDF","Excel","Logs/texto"];
+const cv = document.getElementById("cv");
+let st = {nodes:[], edges:[], seq:1};
+let sel = null;
+
+function svgPt(ev){const p=cv.createSVGPoint();p.x=ev.clientX;p.y=ev.clientY;return p.matrixTransform(cv.getScreenCTM().inverse());}
+function zonaDe(n){const cx=n.x+NW/2,cy=n.y+NH/2;if(cy>GOB_Y)return "Gobierno";return ZONAS[Math.max(0,Math.min(4,Math.floor(cx/ZW)))].id;}
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function wrap(text,max){const w=text.split(" "),l=[];let c="";for(const x of w){if((c+" "+x).trim().length>max&&c){l.push(c);c=x}else c=(c+" "+x).trim()}if(c)l.push(c);return l.slice(0,2);}
+const nodo=id=>st.nodes.find(n=>n.id===id);
+
+function draw(forExport){
+  cv.innerHTML="";
+  el("rect",{x:0,y:0,width:W,height:H,fill:"#fff"},cv);
+  ZONAS.forEach((z,i)=>{
+    el("rect",{x:z.x,y:0,width:ZW,height:GOB_Y,fill:i%2?"#fafbfd":"#f4f7fb"},cv);
+    const t=el("text",{x:z.x+ZW/2,y:20,"text-anchor":"middle","font-size":15,"font-weight":700,fill:"#1b2430","font-family":"system-ui,sans-serif"},cv);t.textContent=z.id;
+    const q=el("text",{x:z.x+ZW/2,y:36,"text-anchor":"middle","font-size":11,fill:"#5b6678","font-family":"system-ui,sans-serif"},cv);q.textContent=z.q;
+  });
+  el("line",{x1:0,y1:GOB_Y,x2:W,y2:GOB_Y,stroke:"#a77bd0","stroke-dasharray":"6 5","stroke-width":2},cv);
+  const g=el("text",{x:12,y:GOB_Y+20,"font-size":13,"font-weight":700,fill:"#7a4ea3","font-family":"system-ui,sans-serif"},cv);g.textContent="Gobierno y seguridad: identidad · catálogo · linaje · costo · PII";
+  const defs=el("defs",{},cv);const m=el("marker",{id:"ar",viewBox:"0 0 10 10",refX:9,refY:5,markerWidth:7,markerHeight:7,orient:"auto-start-reverse"},defs);el("path",{d:"M0 0L10 5L0 10z",fill:"#445"},m);
+  st.edges.forEach(e=>{
+    const a=nodo(e.from),b=nodo(e.to);if(!a||!b)return;
+    const x1=a.x+NW,y1=a.y+NH/2,x2=b.x,y2=b.y+NH/2,dx=Math.max(40,Math.abs(x2-x1)/2);
+    const s=sel&&sel.t==="e"&&sel.id===e.id;
+    const p=el("path",{d:`M${x1} ${y1}C${x1+dx} ${y1} ${x2-dx} ${y2} ${x2} ${y2}`,fill:"none",stroke:s?"#0b6bcb":"#445","stroke-width":s?3:2,"marker-end":"url(#ar)","stroke-dasharray":e.ventana==="streaming"?"2 4":""},cv);
+    if(!forExport){const hit=el("path",{d:p.getAttribute("d"),fill:"none",stroke:"transparent","stroke-width":14,style:"cursor:pointer"},cv);hit.addEventListener("pointerdown",ev=>{ev.stopPropagation();sel={t:"e",id:e.id};refresh();});}
+    const t=el("text",{x:(x1+x2)/2,y:(y1+y2)/2-6,"text-anchor":"middle","font-size":11,"font-weight":600,fill:e.ventana?"#1b2430":"#b42318","font-family":"system-ui,sans-serif",stroke:"#fff","stroke-width":3,"paint-order":"stroke"},cv);t.textContent=e.ventana||"¿batch o streaming?";
+  });
+  st.nodes.forEach(n=>{
+    const [fill,stroke]=COL[n.tipo];const s=sel&&sel.t==="n"&&sel.id===n.id;
+    const gr=el("g",{class:"node","data-id":n.id,transform:`translate(${n.x} ${n.y})`},cv);
+    el("rect",{width:NW,height:NH,rx:8,fill,stroke:s?"#0b6bcb":stroke,"stroke-width":s?3:1.6},gr);
+    const tags=[n.formato,n.pii?"PII":""].filter(Boolean).join(" · ");
+    const lines=wrap(n.label,22);
+    lines.forEach((ln,i)=>{
+      const y=lines.length===1?(tags?19:27):15+i*13;
+      const t=el("text",{x:8,y,"font-size":12,"font-weight":600,fill:"#1b2430","font-family":"system-ui,sans-serif"},gr);t.textContent=ln;
+    });
+    if(tags){const t=el("text",{x:8,y:NH-6,"font-size":10.5,fill:n.pii?"#b42318":"#445","font-family":"system-ui,sans-serif"},gr);t.textContent=tags;}
+    if(!forExport){
+      const h=el("circle",{class:"handle",cx:NW,cy:NH/2,r:7,fill:"#0b6bcb",stroke:"#fff","stroke-width":2},gr);
+      h.addEventListener("pointerdown",ev=>iniciarConexion(ev,n));
+      gr.addEventListener("pointerdown",ev=>{if(ev.target===h)return;iniciarArrastre(ev,n);});
+    }
+  });
+  if(forExport&&forExport.alumno){const t=el("text",{x:W-10,y:H-10,"text-anchor":"end","font-size":12,fill:"#5b6678","font-family":"system-ui,sans-serif"},cv);t.textContent="Alumno: "+forExport.alumno+" · S03 Andina";}
+}
+
+function iniciarArrastre(ev,n){
+  ev.preventDefault();sel={t:"n",id:n.id};const p0=svgPt(ev),ox=n.x,oy=n.y;
+  const mv=e=>{const p=svgPt(e);n.x=Math.max(0,Math.min(W-NW,ox+p.x-p0.x));n.y=Math.max(HEAD,Math.min(H-NH,oy+p.y-p0.y));draw();};
+  const up=()=>{removeEventListener("pointermove",mv);removeEventListener("pointerup",up);refresh();};
+  addEventListener("pointermove",mv);addEventListener("pointerup",up);refresh();
+}
+function iniciarConexion(ev,n){
+  ev.preventDefault();ev.stopPropagation();
+  const l=el("line",{stroke:"#0b6bcb","stroke-width":2.5,"stroke-dasharray":"5 4"},cv);
+  const p0={x:n.x+NW,y:n.y+NH/2};
+  const mv=e=>{const p=svgPt(e);l.setAttribute("x1",p0.x);l.setAttribute("y1",p0.y);l.setAttribute("x2",p.x);l.setAttribute("y2",p.y);};
+  const up=e=>{
+    removeEventListener("pointermove",mv);removeEventListener("pointerup",up);l.remove();
+    const t=document.elementFromPoint(e.clientX,e.clientY),g=t&&t.closest&&t.closest(".node");
+    if(g){const to=g.getAttribute("data-id");
+      if(to!==n.id&&!st.edges.some(x=>x.from===n.id&&x.to===to)){const ed={id:"e"+st.seq++,from:n.id,to,ventana:""};st.edges.push(ed);sel={t:"e",id:ed.id};}}
+    refresh();
+  };
+  addEventListener("pointermove",mv);addEventListener("pointerup",up);
+}
+
+const pal=document.getElementById("palette"),ghost=document.getElementById("ghost");
+CATALOGO.forEach(([titulo,tipo,items])=>{
+  const h=document.createElement("h2");h.textContent=titulo;pal.appendChild(h);
+  items.forEach(([label])=>{
+    const c=document.createElement("div");c.className="chip";c.textContent=label;
+    c.style.background=COL[tipo][0];c.style.borderColor=COL[tipo][1];c.style.color="#1b2430";
+    c.addEventListener("pointerdown",ev=>{
+      ev.preventDefault();ghost.textContent=label;ghost.className="chip";
+      ghost.style.cssText="display:block;background:"+COL[tipo][0]+";border-color:"+COL[tipo][1]+";color:#1b2430;left:"+(ev.clientX+8)+"px;top:"+(ev.clientY+8)+"px";
+      const mv=e=>{ghost.style.left=e.clientX+8+"px";ghost.style.top=e.clientY+8+"px";};
+      const up=e=>{
+        removeEventListener("pointermove",mv);removeEventListener("pointerup",up);ghost.style.display="none";
+        const r=cv.getBoundingClientRect();
+        if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){
+          const p=svgPt(e);const n={id:"n"+st.seq++,tipo,label,x:Math.max(0,Math.min(W-NW,p.x-NW/2)),y:Math.max(HEAD,Math.min(H-NH,p.y-NH/2)),formato:"",pii:false};
+          st.nodes.push(n);sel={t:"n",id:n.id};refresh();
+        }
+      };
+      addEventListener("pointermove",mv);addEventListener("pointerup",up);
+    });
+    pal.appendChild(c);
+  });
+});
+const hint=document.createElement("p");hint.className="hint";hint.textContent="Puedes repetir un nodo las veces que haga falta (por ejemplo, un Job por zona).";pal.appendChild(hint);
+cv.addEventListener("pointerdown",ev=>{if(ev.target===cv||ev.target.tagName==="rect"||ev.target.tagName==="text"){sel=null;refresh();}});
+
+function panel(){
+  const p=document.getElementById("panel");p.innerHTML="";
+  if(!sel){p.innerHTML='<p class="hint">Haz clic en un nodo o en una flecha.</p>';return;}
+  if(sel.t==="n"){
+    const n=nodo(sel.id);if(!n){sel=null;return panel();}
+    p.innerHTML='<label>Texto del nodo</label><input type="text" id="pL">'+
+    '<label>Formato de los datos</label><select id="pF">'+FORMATOS.map(f=>'<option value="'+f+'">'+(f||"— sin definir —")+'</option>').join("")+'</select>'+
+    '<label><input type="checkbox" id="pP"> Contiene datos personales (PII)</label>'+
+    '<p class="hint">Zona actual: <b>'+zonaDe(n)+'</b></p><button id="pD">Eliminar nodo</button>';
+    pL.value=n.label;pF.value=n.formato;pP.checked=n.pii;
+    pL.oninput=()=>{n.label=pL.value;draw();checks();guardar();};
+    pF.onchange=()=>{n.formato=pF.value;refresh();};pP.onchange=()=>{n.pii=pP.checked;refresh();};
+    pD.onclick=()=>{st.nodes=st.nodes.filter(x=>x!==n);st.edges=st.edges.filter(e=>e.from!==n.id&&e.to!==n.id);sel=null;refresh();};
+  }else{
+    const e=st.edges.find(x=>x.id===sel.id);if(!e){sel=null;return panel();}
+    const a=document.createElement("p");a.className="hint";a.textContent=nodo(e.from).label+" → "+nodo(e.to).label;p.appendChild(a);
+    p.insertAdjacentHTML("beforeend",'<label>Ventana de ingesta</label><select id="pV"><option value="">— elige —</option><option value="batch">batch</option><option value="streaming">streaming</option></select><br><br><button id="pD">Eliminar flecha</button>');
+    pV.value=e.ventana;pV.onchange=()=>{e.ventana=pV.value;refresh();};
+    pD.onclick=()=>{st.edges=st.edges.filter(x=>x!==e);sel=null;refresh();};
+  }
+}
+
+function evaluar(){
+  const fu=st.nodes.filter(n=>n.tipo==="fuente"),en=zonaDe;
+  const out=id=>st.edges.filter(e=>e.from===id);
+  const enZona=z=>st.nodes.filter(n=>en(n)===z&&n.tipo!=="nota").length;
+  const orden={Fuentes:0,Bronce:1,Plata:2,Oro:3,Consumo:4};
+  const dif=e=>{const a=orden[en(nodo(e.from))],b=orden[en(nodo(e.to))];return (a===undefined||b===undefined)?0:b-a;};
+  const gob=st.nodes.filter(n=>n.tipo==="gob"&&en(n)==="Gobierno");
+  const alm=st.nodes.filter(n=>n.tipo==="almac");
+  return [
+    ["Las 8 fuentes de Andina están en el lienzo", new Set(fu.map(n=>n.label)).size>=8],
+    ["Cada fuente tiene al menos una flecha de salida", fu.length>0&&fu.every(n=>out(n.id).length>0)],
+    ["Hay nodos en Bronce, Plata y Oro", enZona("Bronce")>0&&enZona("Plata")>0&&enZona("Oro")>0],
+    ["Todas las flechas tienen ventana (batch/streaming)", st.edges.length>0&&st.edges.every(e=>e.ventana)],
+    ["Ninguna flecha salta una zona (ej. Fuente → Oro)", st.edges.length>0&&st.edges.every(e=>dif(e)<=1)],
+    ["Ninguna flecha vuelve hacia atrás", st.edges.every(e=>dif(e)>=0)],
+    ["Los nodos de almacenamiento tienen formato definido", alm.length>0&&alm.every(n=>n.formato)],
+    ["Hay al menos un dato marcado como PII", st.nodes.some(n=>n.pii)],
+    ["Hay 3 o más controles en la banda de gobierno", gob.length>=3],
+    ["Hay algo en Consumo", enZona("Consumo")>0],
+  ].map(([t,ok])=>({criterio:t,cumple:!!ok}));
+}
+function checks(){
+  document.getElementById("checks").innerHTML=evaluar().map(c=>'<li class="'+(c.cumple?"ok":"no")+'">'+(c.cumple?"✔":"✘")+" "+c.criterio+"</li>").join("");
+}
+function refresh(){draw();panel();checks();guardar();}
+function guardar(){try{localStorage.setItem("s03-lakehouse",JSON.stringify(st));}catch(e){}}
+function cargar(){try{const s=JSON.parse(localStorage.getItem("s03-lakehouse")||"null");if(s&&s.nodes)st=s;}catch(e){}}
+
+const dlg=document.getElementById("dlg");let accion=null;
+function pedirNombre(fn){accion=fn;document.getElementById("err").textContent="";
+  try{inN.value=localStorage.getItem("s03-n")||"";inA.value=localStorage.getItem("s03-a")||"";}catch(e){}
+  dlg.showModal();(inN.value?inA:inN).focus();}
+document.getElementById("dCancel").onclick=()=>dlg.close();
+document.getElementById("frm").addEventListener("submit",ev=>{
+  const n=inN.value.trim(),a=inA.value.trim();
+  if(n.length<2||a.length<2){ev.preventDefault();document.getElementById("err").textContent="Escribe tu nombre y tu apellido completos.";return;}
+  try{localStorage.setItem("s03-n",n);localStorage.setItem("s03-a",a);}catch(e){}
+  const f=accion;setTimeout(()=>f(n,a),0);
+});
+const slug=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+function bajar(nombre,mime,contenido){const u=URL.createObjectURL(new Blob([contenido],{type:mime}));const a=document.createElement("a");a.href=u;a.download=nombre;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);}
+function exportJson(n,a){
+  const cs=evaluar();
+  const datos={
+    sesion:"S03 · Diseñar el lakehouse de Andina",version:1,
+    alumno:{nombre:n,apellido:a},exportado:new Date().toISOString(),
+    autocomprobacion:{cumple:cs.filter(c=>c.cumple).length,total:cs.length,criterios:cs},
+    nodos:st.nodes.map(x=>({id:x.id,texto:x.label,tipo:x.tipo,zona:zonaDe(x),formato:x.formato||null,pii:x.pii,x:Math.round(x.x),y:Math.round(x.y)})),
+    flechas:st.edges.map(e=>({desde:e.from,hasta:e.to,desde_texto:nodo(e.from).label,hasta_texto:nodo(e.to).label,ventana:e.ventana||null})),
+  };
+  bajar("S03-lakehouse-"+slug(a)+"-"+slug(n)+".json","application/json",JSON.stringify(datos,null,2));
+}
+function exportSvg(n,a){
+  const keep=sel;sel=null;draw({alumno:n+" "+a});
+  const s=new XMLSerializer().serializeToString(cv);sel=keep;draw();
+  bajar("S03-lakehouse-"+slug(a)+"-"+slug(n)+".svg","image/svg+xml",s);
+}
+bJson.onclick=()=>pedirNombre(exportJson);
+bSvg.onclick=()=>pedirNombre(exportSvg);
+bClear.onclick=()=>{if(!st.nodes.length)return;if(bClear.dataset.c){st={nodes:[],edges:[],seq:1};sel=null;bClear.textContent="Vaciar";delete bClear.dataset.c;refresh();}else{bClear.dataset.c=1;bClear.textContent="¿Seguro? Clic otra vez";setTimeout(()=>{bClear.textContent="Vaciar";delete bClear.dataset.c;},3000);}};
+addEventListener("keydown",e=>{if((e.key==="Delete"||e.key==="Backspace")&&sel&&!/INPUT|SELECT/.test(document.activeElement.tagName)){const d=document.getElementById("pD");if(d)d.click();}});
+cargar();refresh();
+</script>
+</body>
+</html>
